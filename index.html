@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infyro Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --surface: #ffffff;
+      --border: #e8e8e4;
+      --border-light: #f0f0ec;
+      --text-primary: #111110;
+      --text-secondary: #6b6b67;
+      --text-tertiary: #a8a8a4;
+      --accent: #14b8a6;
+      --accent-light: #e6f7f5;
+      --positive: #1a7a4a;
+      --negative: #c0392b;
+      --tag-bg: #f0f0ec;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 44px 0 36px;
+    }
+
+    .header-meta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      margin-top: 6px;
+    }
+
+    .update-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .update-time {
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* ── Theme bar (top level) ── */
+    .theme-bar {
+      background: var(--accent);
+      margin: 0 -40px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .theme-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.6);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .theme-tab:hover {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .theme-tab.active {
+      color: #ffffff;
+      border-bottom: 2px solid rgba(255,255,255,0.8);
+      font-weight: 500;
+    }
+
+    .theme-tab-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      flex-shrink: 0;
+    }
+
+    .theme-tab.active .theme-tab-dot {
+      background: rgba(255,255,255,0.9);
+    }
+
+    /* Theme content panels */
+    .theme-panel { display: none; }
+    .theme-panel.active { display: block; }
+
+    /* ── Nav bar ── */
+    nav {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 0;
+    }
+
+    .nav-tab {
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 400;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-tertiary);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      margin-bottom: -1px;
+      position: relative;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-secondary);
+    }
+
+    .nav-tab.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── Page sections ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── Section title ── */
+    .section-title {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 780px;
+      margin-bottom: 36px;
+      padding-left: 16px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .section-body p {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Tracker header row ── */
+    .tracker-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .stats-inline {
+      display: flex;
+      gap: 20px;
+      flex-shrink: 0;
+      align-items: flex-end;
+      padding-bottom: 2px;
+    }
+
+    .stat-inline {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .stat-inline-value {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .stat-inline-value.accent { color: var(--accent); }
+
+    .stat-inline-label {
+      font-size: 9.5px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── Stats bar (kept for potential reuse) ── */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 40px;
+      border-right: 1px solid var(--border-light);
+      margin-right: 40px;
+    }
+
+    .stat:last-child { border-right: none; margin-right: 0; }
+
+    .stat-label {
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .stat-value.accent { color: var(--accent); }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table-wrap::before {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead th {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      font-family: 'DM Mono', monospace;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    thead th.right { text-align: right; }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.15s ease;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--accent-light); }
+
+    tbody td {
+      padding: 16px 20px;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    tbody td.right {
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+    }
+
+    .company-name { font-weight: 400; font-size: 14px; }
+
+    .ticker {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .exchange {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .mktcap { font-weight: 400; color: var(--text-primary); }
+    .growth { font-weight: 400; }
+    .growth.pos { color: var(--positive); }
+    .growth.neg { color: var(--negative); }
+    .growth.flat { color: var(--text-secondary); }
+
+    .placeholder {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    /* ── Expandable row description ── */
+    tbody tr.data-row {
+      cursor: default;
+    }
+
+    tbody tr.desc-row td {
+      padding: 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    tbody tr.desc-row:last-child td {
+      border-bottom: none;
+    }
+
+    .desc-inner {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.28s ease;
+    }
+
+    .desc-inner-content {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .desc-text {
+      padding: 0 20px 16px 20px;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-left: 2px solid var(--accent);
+      margin: 14px 20px;
+      padding: 4px 0 4px 14px;
+      opacity: 0;
+      transition: opacity 0.2s ease 0.1s;
+    }
+
+    /* When data row is hovered, expand the following desc row */
+    tbody tr.data-row:hover + tr.desc-row .desc-inner,
+    tbody tr.desc-row:hover .desc-inner {
+      grid-template-rows: 1fr;
+    }
+
+    tbody tr.data-row:hover + tr.desc-row .desc-text,
+    tbody tr.desc-row:hover .desc-text {
+      opacity: 1;
+    }
+
+    /* Keep data row highlighted while desc is hovered */
+    tbody tr.data-row:hover,
+    tbody tr.desc-row:hover {
+      background: var(--accent-light);
+    }
+
+    tbody tr.data-row:has(+ tr.desc-row:hover) {
+      background: var(--accent-light);
+    }
+
+    /* ── Articles page ── */
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .article-card {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-light);
+      cursor: pointer;
+    }
+
+    .article-card:first-child {
+      border-top: 1px solid var(--border-light);
+    }
+
+    .article-card:hover .article-title {
+      color: var(--accent);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .article-date {
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+    }
+
+    .article-title {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      transition: color 0.15s ease;
+      line-height: 1.35;
+    }
+
+    .article-preview {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 720px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-read-more {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* Article expanded view */
+    .article-full {
+      display: none;
+      max-width: 720px;
+    }
+
+    .article-full.active {
+      display: block;
+    }
+
+    .article-full-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      margin-bottom: 32px;
+      transition: color 0.15s ease;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .article-full-back:hover { color: var(--accent); }
+
+    .article-full-title {
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .article-full-date {
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .article-full-body {
+      font-size: 14.5px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .article-full-body p {
+      margin-bottom: 20px;
+    }
+
+    .article-full-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 28px 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .articles-empty {
+      padding: 48px 0;
+      font-size: 13.5px;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    /* ── Placeholder pages ── */
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 64px 0 80px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .coming-soon-label {
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent);
+    }
+
+    .coming-soon h2 {
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .coming-soon p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-note {
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* ── Common-size page layout ── */
+    .cs-layout {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      min-height: 600px;
+    }
+
+    /* Left toolbar */
+    .cs-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      overflow: hidden;
+      position: sticky;
+      top: 24px;
+    }
+
+    .cs-sidebar-label {
+      font-size: 10px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 12px 16px 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .cs-sidebar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 11px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.12s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .cs-sidebar-item:last-child { border-bottom: none; }
+
+    .cs-sidebar-item:hover {
+      background: var(--accent-light);
+    }
+
+    .cs-sidebar-item.active {
+      background: var(--accent-light);
+      border-left-color: var(--accent);
+    }
+
+    .cs-sidebar-name {
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .cs-sidebar-ticker {
+      font-size: 10.5px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+    }
+
+    .cs-sidebar-item.active .cs-sidebar-name { color: var(--accent); }
+    .cs-sidebar-item.active .cs-sidebar-ticker { color: var(--accent); opacity: 0.7; }
+
+    /* Main content area */
+    .cs-main {
+      flex: 1;
+      min-width: 0;
+      padding-left: 32px;
+    }
+
+    .cs-company-heading {
+      margin-bottom: 28px;
+    }
+
+    .cs-company-heading h2 {
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .cs-company-heading p {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+
+    /* Statement sections */
+    .cs-statement {
+      margin-bottom: 40px;
+    }
+
+    .cs-statement-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Common-size table */
+    .cs-table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cs-table-wrap::before {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .cs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cs-table thead th {
+      padding: 12px 16px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .cs-table thead th:first-child {
+      text-align: left;
+      width: 40%;
+    }
+
+    .cs-table thead th.cs-selected {
+      color: var(--accent);
+    }
+
+    .cs-table tbody tr {
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.12s ease;
+    }
+
+    .cs-table tbody tr:last-child { border-bottom: none; }
+    .cs-table tbody tr:hover { background: var(--accent-light); }
+
+    .cs-table tbody tr.cs-subtotal {
+      background: var(--bg);
+    }
+
+    .cs-table tbody tr.cs-subtotal td {
+      font-weight: 500;
+      font-size: 12.5px;
+    }
+
+    .cs-table td {
+      padding: 11px 16px;
+      font-size: 13px;
+      color: var(--text-primary);
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .cs-table td:first-child {
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .cs-table tr.cs-subtotal td:first-child {
+      color: var(--text-primary);
+    }
+
+    .cs-table td.cs-selected {
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .cs-note {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-style: italic;
+      margin-top: 8px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header     { animation: fadeUp 0.5s ease both; }
+    nav        { animation: fadeUp 0.5s 0.05s ease both; }
+    .page-section.active { animation: fadeUp 0.3s ease both; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .page { padding: 0 20px 60px; }
+      header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px 0 28px; }
+      .header-meta { text-align: left; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { padding-right: 24px; margin-right: 24px; margin-bottom: 16px; }
+      thead th, tbody td { padding: 12px 14px; }
+      .nav-tab { padding: 12px 16px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ── Header ── -->
+    <header>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" width="308" height="55" aria-label="Infyro Research">
+          <circle cx="32" cy="25" r="7" fill="#14b8a6"/>
+          <circle cx="32" cy="25" r="4" fill="#f9f9f7"/>
+          <circle cx="32" cy="25" r="2" fill="#14b8a6"/>
+          <path d="M 25 24 C 20 18, 10 12, 2 10 C 8 13, 14 17, 18 22 Z" fill="#14b8a6"/>
+          <path d="M 25 26 C 20 30, 10 34, 2 38 C 8 34, 14 30, 18 26 Z" fill="#14b8a6"/>
+          <path d="M 25 25 C 18 20, 10 15, 3 13" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 25 25 C 18 23, 10 22, 3 22" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 25 25 C 18 28, 10 30, 3 32" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 39 24 C 44 18, 54 12, 62 10 C 56 13, 50 17, 46 22 Z" fill="#14b8a6"/>
+          <path d="M 39 26 C 44 30, 54 34, 62 38 C 56 34, 50 30, 46 26 Z" fill="#14b8a6"/>
+          <path d="M 39 25 C 46 20, 54 15, 61 13" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 39 25 C 46 23, 54 22, 61 22" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 39 25 C 46 28, 54 30, 61 32" stroke="#14b8a6" stroke-width="1.2" fill="none" opacity="0.6"/>
+          <path d="M 28 30 C 26 34, 26 38, 28 42" stroke="#14b8a6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 28 30 C 24 32, 23 36, 25 40" stroke="#14b8a6" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M 36 30 C 38 34, 38 38, 36 42" stroke="#14b8a6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 36 30 C 40 32, 41 36, 39 40" stroke="#14b8a6" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <text x="78" y="28" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="#14b8a6" letter-spacing="2">Infyro</text>
+          <text x="80" y="43" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="300" fill="#14b8a6" letter-spacing="5">Research</text>
+        </svg>
+        <p class="page-subtitle">Thematic equity research focused on AI disruption</p>
+      </div>
+      <div class="header-meta">
+        <span class="update-label">Last updated</span>
+        <span class="update-time">— placeholder —</span>
+      </div>
+    </header>
+
+    <!-- ── Theme bar ── -->
+    <div class="theme-bar">
+      <button class="theme-tab active" onclick="showTheme('agentic-europe', this)">
+        <span class="theme-tab-dot"></span>
+        2026: Agentic Orchestration — Europe
+      </button>
+      <!-- Future themes added here, e.g:
+      <button class="theme-tab" onclick="showTheme('ai-us', this)">
+        <span class="theme-tab-dot"></span>
+        AI Infrastructure: US
+      </button>
+      -->
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- THEME: AGENTIC ORCHESTRATION — EUROPE      -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="theme-agentic-europe" class="theme-panel active">
+
+    <!-- ── Nav bar ── -->
+    <nav>
+      <div class="nav-inner">
+        <button class="nav-tab active" onclick="showPage('tracker', this)">Tracker</button>
+        <button class="nav-tab" onclick="showPage('deepdives', this)">Deep Dives</button>
+        <button class="nav-tab" onclick="showPage('articles', this)">Articles</button>
+        <button class="nav-tab" onclick="showPage('commonsize', this)">Common-Size</button>
+        <button class="nav-tab" onclick="showPage('coverage', this)">Coverage</button>
+      </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- PAGE: TRACKER                          -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="page-tracker" class="page-section active">
+
+      <div class="tracker-header-row">
+        <h2 class="section-title">Agentic orchestration: Europe mid/large-cap impact basket</h2>
+        <div class="stats-inline">
+          <div class="stat-inline">
+            <span class="stat-inline-value">14</span>
+            <span class="stat-inline-label">Companies</span>
+          </div>
+          <div class="stat-inline">
+            <span class="stat-inline-value">7</span>
+            <span class="stat-inline-label">Exchanges</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-body">
+        <p>In 2026, digital procurement &amp; supply chain environments move towards an end state of "autonomous enterprise" — a paradigm in which &gt;50% of core industrial processing (procurement, payroll, logistics) is handled by agentic personnel (AI bots).</p>
+        <p>Where software harnessed robotic-type process automation (RPA) that followed strict rules, the approaching frontier is agentic-type (APA) "smart" decisioning, where reasoning occurs through exception.</p>
+        <p>In one example, an agent notices a shipping delay and autonomously re-negotiates a contract via an enterprise resource planning system (ERP).</p>
+        <p>We investigate this disruption across a full agentic software value chain, from hardware providers to the pure software layer, using a basket of 14 European large cap names as our test universe.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Exchange</th>
+              <th class="right">Market Cap</th>
+              <th class="right">Price (+/-)</th>
+              <th class="right">YoY Revenue Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- SAP SE -->
+            <tr class="data-row">
+              <td><span class="company-name">SAP SE</span></td>
+              <td><span class="ticker">SAP</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">SAP provides business-critical operation software, which powers finance, procurement, HR & supply chain functions.</p></div></div></td>
+            </tr>
+
+            <!-- ASML -->
+            <tr class="data-row">
+              <td><span class="company-name">ASML</span></td>
+              <td><span class="ticker">ASML</span></td>
+              <td><span class="exchange">Euronext Amsterdam</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">ASML is the world leader in high-precision lithography: a core yet incredibly sophisticated manufacturing step in the production of microchips powering digital intelligence in 2026.</p></div></div></td>
+            </tr>
+
+            <!-- Siemens AG -->
+            <tr class="data-row">
+              <td><span class="company-name">Siemens AG</span></td>
+              <td><span class="ticker">SIE</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Siemens is a provider of automation & infrastructure, with physical & digital services that underpin manufacturing, real estate, transport, healthcare and energy systems worldwide.</p></div></div></td>
+            </tr>
+
+            <!-- Schneider Electric -->
+            <tr class="data-row">
+              <td><span class="company-name">Schneider Electric</span></td>
+              <td><span class="ticker">SU</span></td>
+              <td><span class="exchange">Euronext Paris</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Schneider are leading experts in the electrification & automation of end-to-end industrial processes, with a focus on the energy sector and internet-of-things.</p></div></div></td>
+            </tr>
+
+            <!-- Infineon Technologies -->
+            <tr class="data-row">
+              <td><span class="company-name">Infineon Technologies</span></td>
+              <td><span class="ticker">IFX</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Infineon are a leading producer of power semiconductors and their adjacent technologies: microcontrollers, converters, sensors and memory products.</p></div></div></td>
+            </tr>
+
+            <!-- Dassault Systèmes -->
+            <tr class="data-row">
+              <td><span class="company-name">Dassault Systèmes</span></td>
+              <td><span class="ticker">DSY</span></td>
+              <td><span class="exchange">Euronext Paris</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Dassault Systemes are a pioneer in computer-aided design (CAD) technology. Their "Virtual Twin" approach builds 3D models which not only look, but also behave like a given object.</p></div></div></td>
+            </tr>
+
+            <!-- Adyen NV -->
+            <tr class="data-row">
+              <td><span class="company-name">Adyen NV</span></td>
+              <td><span class="ticker">ADYEN</span></td>
+              <td><span class="exchange">Euronext Amsterdam</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Adyen is a financial services firm seeking to simplify global commerce, by replacing a fragmented, multi-party payments ecosystem with a single proprietary platform.</p></div></div></td>
+            </tr>
+
+            <!-- Amadeus IT Group -->
+            <tr class="data-row">
+              <td><span class="company-name">Amadeus IT Group</span></td>
+              <td><span class="ticker">AMS</span></td>
+              <td><span class="exchange">BME Madrid</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Amadeus develops digital technology solutions which cater to each segment of the global tourism industry.</p></div></div></td>
+            </tr>
+
+            <!-- Sage Group -->
+            <tr class="data-row">
+              <td><span class="company-name">Sage Group</span></td>
+              <td><span class="ticker">SGE</span></td>
+              <td><span class="exchange">LSE London</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Sage Group and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+            <!-- Krones AG -->
+            <tr class="data-row">
+              <td><span class="company-name">Krones AG</span></td>
+              <td><span class="ticker">KRN</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Krones AG and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+            <!-- Konecranes -->
+            <tr class="data-row">
+              <td><span class="company-name">Konecranes</span></td>
+              <td><span class="ticker">KCR</span></td>
+              <td><span class="exchange">Nasdaq Helsinki</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Konecranes and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+            <!-- Nexus AG -->
+            <tr class="data-row">
+              <td><span class="company-name">Nexus AG</span></td>
+              <td><span class="ticker">NXU</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Nexus AG and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+            <!-- Logwin AG -->
+            <tr class="data-row">
+              <td><span class="company-name">Logwin AG</span></td>
+              <td><span class="ticker">TGHN</span></td>
+              <td><span class="exchange">XETRA</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Logwin AG and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+            <!-- Interroll -->
+            <tr class="data-row">
+              <td><span class="company-name">Interroll</span></td>
+              <td><span class="ticker">INRN</span></td>
+              <td><span class="exchange">SIX Swiss</span></td>
+              <td class="right"><span class="placeholder">live data soon</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+              <td class="right"><span class="placeholder">—</span></td>
+            </tr>
+            <tr class="desc-row">
+              <td colspan="6"><div class="desc-inner"><div class="desc-inner-content"><p class="desc-text">Your description of Interroll and its relevance to agentic AI disruption goes here.</p></div></div></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /page-tracker -->
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- PAGE: ARTICLES                         -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="page-articles" class="page-section">
+
+      <!-- List view -->
+      <div id="articles-list-view">
+        <h2 class="section-title" style="margin-bottom: 28px;">Articles</h2>
+        <div class="articles-list" id="articles-container">
+          <p class="articles-empty">Loading articles...</p>
+        </div>
+      </div>
+
+      <!-- Full article view (hidden until a card is clicked) -->
+      <div id="articles-full-view" class="article-full">
+        <button class="article-full-back" onclick="closeArticle()">← Back to articles</button>
+        <h1 class="article-full-title" id="full-title"></h1>
+        <span class="article-full-date" id="full-date"></span>
+        <div class="article-full-body" id="full-body"></div>
+      </div>
+
+    </div><!-- /page-articles -->
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- PAGE: DEEP DIVES                       -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="page-deepdives" class="page-section">
+      <div class="coming-soon">
+        <span class="coming-soon-label">Coming soon</span>
+        <h2>Deep Dives</h2>
+        <p>Long-form research notes on individual names in the coverage universe — examining their positioning within the agentic software value chain, competitive dynamics, and key risk factors.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- PAGE: COVERAGE                         -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="page-coverage" class="page-section">
+      <div class="coming-soon">
+        <span class="coming-soon-label">Coming soon</span>
+        <h2>Coverage</h2>
+        <p>A full breakdown of the 14 companies in our European impact basket — including their role in the agentic value chain, exchange listings, and coverage rationale.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- PAGE: COMMON-SIZE                      -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="page-commonsize" class="page-section">
+      <div class="cs-layout">
+
+        <!-- ── Left sidebar: company list ── -->
+        <div class="cs-sidebar">
+          <div class="cs-sidebar-label">Companies</div>
+          <div class="cs-sidebar-item active" onclick="selectCompany(this, 'SAP SE', 'SAP · XETRA')">
+            <span class="cs-sidebar-name">SAP SE</span>
+            <span class="cs-sidebar-ticker">SAP · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'ASML', 'ASML · Euronext Amsterdam')">
+            <span class="cs-sidebar-name">ASML</span>
+            <span class="cs-sidebar-ticker">ASML · Euronext AMS</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Siemens AG', 'SIE · XETRA')">
+            <span class="cs-sidebar-name">Siemens AG</span>
+            <span class="cs-sidebar-ticker">SIE · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Schneider Electric', 'SU · Euronext Paris')">
+            <span class="cs-sidebar-name">Schneider Electric</span>
+            <span class="cs-sidebar-ticker">SU · Euronext Paris</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Infineon Technologies', 'IFX · XETRA')">
+            <span class="cs-sidebar-name">Infineon Technologies</span>
+            <span class="cs-sidebar-ticker">IFX · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Dassault Systèmes', 'DSY · Euronext Paris')">
+            <span class="cs-sidebar-name">Dassault Systèmes</span>
+            <span class="cs-sidebar-ticker">DSY · Euronext Paris</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Adyen NV', 'ADYEN · Euronext Amsterdam')">
+            <span class="cs-sidebar-name">Adyen NV</span>
+            <span class="cs-sidebar-ticker">ADYEN · Euronext AMS</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Amadeus IT Group', 'AMS · BME Madrid')">
+            <span class="cs-sidebar-name">Amadeus IT Group</span>
+            <span class="cs-sidebar-ticker">AMS · BME Madrid</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Sage Group', 'SGE · LSE London')">
+            <span class="cs-sidebar-name">Sage Group</span>
+            <span class="cs-sidebar-ticker">SGE · LSE London</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Krones AG', 'KRN · XETRA')">
+            <span class="cs-sidebar-name">Krones AG</span>
+            <span class="cs-sidebar-ticker">KRN · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Konecranes', 'KCR · Nasdaq Helsinki')">
+            <span class="cs-sidebar-name">Konecranes</span>
+            <span class="cs-sidebar-ticker">KCR · Nasdaq Helsinki</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Nexus AG', 'NXU · XETRA')">
+            <span class="cs-sidebar-name">Nexus AG</span>
+            <span class="cs-sidebar-ticker">NXU · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Logwin AG', 'TGHN · XETRA')">
+            <span class="cs-sidebar-name">Logwin AG</span>
+            <span class="cs-sidebar-ticker">TGHN · XETRA</span>
+          </div>
+          <div class="cs-sidebar-item" onclick="selectCompany(this, 'Interroll', 'INRN · SIX Swiss')">
+            <span class="cs-sidebar-name">Interroll</span>
+            <span class="cs-sidebar-ticker">INRN · SIX Swiss</span>
+          </div>
+        </div>
+
+        <!-- ── Main content ── -->
+        <div class="cs-main">
+
+          <div class="cs-company-heading">
+            <h2 id="cs-company-name">SAP SE</h2>
+            <p id="cs-company-ticker">SAP · XETRA — Common-size financial statements</p>
+          </div>
+
+          <!-- ── Income Statement ── -->
+          <div class="cs-statement">
+            <div class="cs-statement-title">Income Statement <span style="font-weight:300;color:var(--text-tertiary);letter-spacing:0">— % of Revenue</span></div>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Line item</th>
+                    <th class="cs-selected" id="cs-col-selected">SAP SE</th>
+                    <th>Peer A</th>
+                    <th>Peer B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Revenue</td><td class="cs-selected">100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+                  <tr><td>Cost of revenue</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Gross profit</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Research &amp; development</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Sales &amp; marketing</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>General &amp; administrative</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Operating income (EBIT)</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Interest expense</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other income / (expense)</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Pre-tax income (EBT)</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Income tax</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Net income</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cs-note">Figures expressed as % of total revenue. Peer columns pending.</p>
+          </div>
+
+          <!-- ── Balance Sheet ── -->
+          <div class="cs-statement">
+            <div class="cs-statement-title">Balance Sheet <span style="font-weight:300;color:var(--text-tertiary);letter-spacing:0">— % of Total Assets</span></div>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Line item</th>
+                    <th class="cs-selected">SAP SE</th>
+                    <th>Peer A</th>
+                    <th>Peer B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Cash &amp; equivalents</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Accounts receivable</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Inventory</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other current assets</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Total current assets</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Property, plant &amp; equipment</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Intangible assets &amp; goodwill</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other non-current assets</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Total assets</td><td class="cs-selected">100.0%</td><td>100.0%</td><td>100.0%</td></tr>
+                  <tr><td>Accounts payable</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Short-term debt</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other current liabilities</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Total current liabilities</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Long-term debt</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other non-current liabilities</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Total liabilities</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Total equity</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cs-note">Figures expressed as % of total assets. Peer columns pending.</p>
+          </div>
+
+          <!-- ── Cash Flow Statement ── -->
+          <div class="cs-statement">
+            <div class="cs-statement-title">Cash Flow Statement <span style="font-weight:300;color:var(--text-tertiary);letter-spacing:0">— % of Revenue</span></div>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Line item</th>
+                    <th class="cs-selected">SAP SE</th>
+                    <th>Peer A</th>
+                    <th>Peer B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Net income</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Depreciation &amp; amortisation</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Changes in working capital</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other operating adjustments</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Cash from operations</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Capital expenditure</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Acquisitions</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Other investing activities</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Cash from investing</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Debt issuance / (repayment)</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Dividends paid</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr><td>Share buybacks</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Cash from financing</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                  <tr class="cs-subtotal"><td>Free cash flow</td><td class="cs-selected">—</td><td>—</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cs-note">Figures expressed as % of total revenue. Peer columns pending.</p>
+          </div>
+
+        </div><!-- /cs-main -->
+      </div><!-- /cs-layout -->
+    </div><!-- /page-commonsize -->
+
+
+    </div><!-- /theme-agentic-europe -->
+
+    <footer>
+      <p class="footer-note">
+        Market cap data updated twice daily. Revenue growth figures reflect the most recent reported fiscal year and are updated quarterly. All figures in local currency unless stated otherwise.
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" width="112" height="20" aria-label="Infyro Research" opacity="0.4">
+        <circle cx="32" cy="25" r="7" fill="#14b8a6"/>
+        <circle cx="32" cy="25" r="4" fill="#f9f9f7"/>
+        <circle cx="32" cy="25" r="2" fill="#14b8a6"/>
+        <path d="M 25 24 C 20 18, 10 12, 2 10 C 8 13, 14 17, 18 22 Z" fill="#14b8a6"/>
+        <path d="M 25 26 C 20 30, 10 34, 2 38 C 8 34, 14 30, 18 26 Z" fill="#14b8a6"/>
+        <path d="M 39 24 C 44 18, 54 12, 62 10 C 56 13, 50 17, 46 22 Z" fill="#14b8a6"/>
+        <path d="M 39 26 C 44 30, 54 34, 62 38 C 56 34, 50 30, 46 26 Z" fill="#14b8a6"/>
+        <text x="78" y="28" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="#14b8a6" letter-spacing="2">Infyro</text>
+        <text x="80" y="42" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="300" fill="#14b8a6" letter-spacing="5">Research</text>
+      </svg>
+    </footer>
+
+  </div><!-- /page -->
+
+  <script src="articles.js"></script>
+  <script>
+    // ── Page & theme navigation ── //
+    function showTheme(id, tab) {
+      document.querySelectorAll('.theme-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.theme-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('theme-' + id).classList.add('active');
+      tab.classList.add('active');
+    }
+
+    function showPage(id, tab) {
+      const activeTheme = document.querySelector('.theme-panel.active');
+      activeTheme.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      activeTheme.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      activeTheme.querySelector('#page-' + id).classList.add('active');
+      tab.classList.add('active');
+      if (id === 'articles') renderArticles();
+    }
+
+    function selectCompany(item, name, ticker) {
+      document.querySelectorAll('.cs-sidebar-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('cs-company-name').textContent = name;
+      document.getElementById('cs-company-ticker').textContent = ticker + ' — Common-size financial statements';
+      document.querySelectorAll('.cs-col-selected, thead .cs-selected').forEach(el => {
+        el.textContent = name;
+      });
+    }
+
+    // ── Articles ── //
+    function renderArticles() {
+      const container = document.getElementById('articles-container');
+      if (!container) return;
+
+      if (!articles || articles.length === 0) {
+        container.innerHTML = '<p class="articles-empty">No articles yet — add your first one to articles.js</p>';
+        return;
+      }
+
+      container.innerHTML = articles.map((a, i) => {
+        // Build a 2-line preview from the text
+        const preview = a.text.replace(/\n+/g, ' ').trim().slice(0, 180) + '…';
+        return `
+          <div class="article-card" onclick="openArticle(${i})">
+            <div class="article-meta">
+              <span class="article-date">${a.date}</span>
+            </div>
+            <div class="article-title">${a.title}</div>
+            <div class="article-preview">${preview}</div>
+            <span class="article-read-more">Read more →</span>
+          </div>`;
+      }).join('');
+    }
+
+    function openArticle(index) {
+      const a = articles[index];
+      document.getElementById('full-title').textContent = a.title;
+      document.getElementById('full-date').textContent = a.date;
+      // Convert double newlines to paragraph tags; turn [image: path] markers into real images
+      const blocks = a.text.split(/\n\n+/).map(p => p.trim());
+      const html = blocks.map(p => {
+        const imgMatch = p.match(/^\[image:\s*(.+?)\]$/);
+        if (imgMatch) {
+          return `<img class="article-image" src="${imgMatch[1]}" alt="${a.title}" loading="lazy">`;
+        }
+        return `<p>${p}</p>`;
+      }).join('');
+      document.getElementById('full-body').innerHTML = html;
+      document.getElementById('articles-list-view').style.display = 'none';
+      const fullView = document.getElementById('articles-full-view');
+      fullView.classList.add('active');
+      fullView.style.display = 'block';
+    }
+
+    function closeArticle() {
+      document.getElementById('articles-list-view').style.display = 'block';
+      const fullView = document.getElementById('articles-full-view');
+      fullView.classList.remove('active');
+      fullView.style.display = 'none';
+    }
+
+    // Render articles on first load in case page-articles is active
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('page-articles').classList.contains('active')) {
+        renderArticles();
+      }
+    });
+  </script>
+
+</body>
+</html>
