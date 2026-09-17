@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Infyro Research</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -906,6 +907,83 @@
       font-weight: 400;
     }
 
+    /* Tokenomics pricing-history chart */
+    .pricing-chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .pricing-chart-card::before {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .pricing-chart-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px 0;
+    }
+
+    .pricing-chart-title {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .pricing-chart-toggle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background 0.12s ease;
+      flex-shrink: 0;
+    }
+
+    .pricing-chart-toggle:hover {
+      background: var(--accent-light);
+    }
+
+    .pricing-chart-canvas-wrap {
+      position: relative;
+      height: 340px;
+      padding: 12px 16px 4px;
+    }
+
+    .pricing-chart-table-wrap {
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+      overflow-x: auto;
+    }
+
+    .pricing-chart-table-wrap .cs-table th:last-child,
+    .pricing-chart-table-wrap .cs-table td:last-child {
+      text-align: left;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    @media (max-width: 640px) {
+      .pricing-chart-canvas-wrap { height: 280px; }
+      .pricing-chart-head { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 4px; }
+    }
+
     .stat-tile-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1098,11 +1176,11 @@
       <div class="stat-tile-row">
         <div class="stat-tile">
           <span class="stat-tile-label">Avg. input cost</span>
-          <span class="stat-tile-value">$1.66<span class="stat-tile-unit">/M</span></span>
+          <span class="stat-tile-value">$1.61<span class="stat-tile-unit">/M</span></span>
         </div>
         <div class="stat-tile">
           <span class="stat-tile-label">Avg. output cost</span>
-          <span class="stat-tile-value">$8.18<span class="stat-tile-unit">/M</span></span>
+          <span class="stat-tile-value">$7.75<span class="stat-tile-unit">/M</span></span>
         </div>
         <div class="stat-tile">
           <span class="stat-tile-label">Cheapest model</span>
@@ -1113,6 +1191,24 @@
           <span class="stat-tile-label">Priciest model</span>
           <span class="stat-tile-value">$10.00<span class="stat-tile-unit">/$50.00</span></span>
           <span class="stat-tile-sub">Claude Fable 5.1</span>
+        </div>
+      </div>
+
+      <div class="pricing-chart-card">
+        <div class="pricing-chart-head">
+          <span class="pricing-chart-title">Flagship model pricing &mdash; trailing 12 months (blended $/M tokens, log scale)</span>
+          <button type="button" class="pricing-chart-toggle" onclick="togglePricingTable(this)">View as table</button>
+        </div>
+        <div class="pricing-chart-canvas-wrap">
+          <canvas id="pricingChartCanvas" role="img" aria-label="Line chart of blended per-million-token price for each provider's flagship model over the trailing 12 months, plus a blended average across all eight."></canvas>
+        </div>
+        <div class="pricing-chart-table-wrap" id="pricingChartTableWrap" hidden>
+          <table class="cs-table" id="pricingChartTable">
+            <thead>
+              <tr><th>Model</th><th>Date</th><th>Input $/M</th><th>Output $/M</th><th>Note</th></tr>
+            </thead>
+            <tbody id="pricingChartTableBody"></tbody>
+          </table>
         </div>
       </div>
 
@@ -1129,7 +1225,7 @@
           <tbody>
             <tr class="cs-subtotal"><td colspan="4">OpenAI</td></tr>
             <tr>
-              <td>GPT-5.6 Sol</td><td>Flagship</td><td>$5.00</td><td>$30.00</td>
+              <td>GPT-5.6 Sol</td><td>Flagship</td><td>$4.00</td><td>$20.00</td>
             </tr>
             <tr>
               <td>GPT-5.6 Terra</td><td>Balanced</td><td>$2.00</td><td>$12.00</td>
@@ -1238,6 +1334,7 @@
   </div><!-- /page -->
 
   <script src="articles.js"></script>
+  <script src="pricing-history.js"></script>
   <script>
     // ── Page & theme navigation ── //
     function showTheme(id, tab) {
@@ -1254,6 +1351,214 @@
       activeTheme.querySelector('#page-' + id).classList.add('active');
       tab.classList.add('active');
       if (id === 'articles') renderArticles();
+      if (id === 'tokenomics') renderPricingChart();
+    }
+
+    // ── Tokenomics pricing chart ── //
+    let _pricingChartInstance = null;
+
+    function priceAt(events, t) {
+      let latest = null;
+      for (const e of events) {
+        const et = new Date(e.date + 'T00:00:00Z').getTime();
+        if (et <= t && (!latest || et > latest._t)) latest = Object.assign({}, e, { _t: et });
+      }
+      return latest ? { input: latest.input, output: latest.output } : null;
+    }
+
+    function buildSeriesPoints(events, startT, endT) {
+      const points = [];
+      const startPrice = priceAt(events, startT);
+      if (startPrice) points.push({ x: startT, y: (startPrice.input + startPrice.output) / 2 });
+      events.forEach(e => {
+        const t = new Date(e.date + 'T00:00:00Z').getTime();
+        if (t > startT && t <= endT) points.push({ x: t, y: (e.input + e.output) / 2 });
+      });
+      const endPrice = priceAt(events, endT);
+      if (endPrice && (points.length === 0 || points[points.length - 1].x !== endT)) {
+        points.push({ x: endT, y: (endPrice.input + endPrice.output) / 2 });
+      }
+      return points;
+    }
+
+    function computeBlendedTrend(models, startT, endT) {
+      const dateSet = new Set([startT, endT]);
+      Object.values(models).forEach(m => {
+        m.events.forEach(e => {
+          const t = new Date(e.date + 'T00:00:00Z').getTime();
+          if (t >= startT && t <= endT) dateSet.add(t);
+        });
+      });
+      const dates = Array.from(dateSet).sort((a, b) => a - b);
+      return dates.map(t => {
+        let sum = 0, n = 0;
+        Object.values(models).forEach(m => {
+          const p = priceAt(m.events, t);
+          if (p) { sum += (p.input + p.output) / 2; n++; }
+        });
+        return { x: t, y: n ? sum / n : null };
+      }).filter(p => p.y !== null);
+    }
+
+    function formatPricingTick(ts) {
+      return new Date(ts).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    }
+
+    function renderPricingChart() {
+      if (_pricingChartInstance) { _pricingChartInstance.resize(); return; }
+      const canvas = document.getElementById('pricingChartCanvas');
+      if (!canvas || typeof pricingHistory === 'undefined' || typeof Chart === 'undefined') return;
+
+      const windowEnd = new Date();
+      windowEnd.setUTCHours(0, 0, 0, 0);
+      const windowStart = new Date(windowEnd);
+      windowStart.setUTCFullYear(windowStart.getUTCFullYear() - 1);
+      const startT = windowStart.getTime();
+      const endT = windowEnd.getTime();
+
+      const datasets = Object.keys(pricingHistory).map(name => {
+        const m = pricingHistory[name];
+        return {
+          label: name + ' (' + m.provider + ')',
+          data: buildSeriesPoints(m.events, startT, endT),
+          borderColor: m.color,
+          backgroundColor: m.color,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: m.color,
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2,
+          stepped: 'before',
+          fill: false,
+          tension: 0
+        };
+      });
+
+      datasets.push({
+        label: 'Blended average (8 flagship models)',
+        data: computeBlendedTrend(pricingHistory, startT, endT),
+        borderColor: '#111110',
+        backgroundColor: '#111110',
+        borderWidth: 2,
+        borderDash: [6, 4],
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        pointBackgroundColor: '#111110',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2,
+        stepped: 'before',
+        fill: false,
+        tension: 0,
+        order: -1
+      });
+
+      _pricingChartInstance = new Chart(canvas.getContext('2d'), {
+        type: 'line',
+        data: { datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            x: {
+              type: 'linear',
+              min: startT,
+              max: endT,
+              grid: { color: '#e1e0d9' },
+              ticks: {
+                color: '#898781',
+                font: { family: "'IBM Plex Mono', monospace", size: 10 },
+                callback: formatPricingTick,
+                maxRotation: 0,
+                autoSkip: true,
+                maxTicksLimit: 7
+              }
+            },
+            y: {
+              type: 'logarithmic',
+              grid: { color: '#e1e0d9' },
+              ticks: {
+                color: '#898781',
+                font: { family: "'IBM Plex Mono', monospace", size: 10 },
+                callback: v => {
+                  const allowed = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50];
+                  return allowed.includes(v) ? '$' + v : null;
+                }
+              },
+              title: {
+                display: true,
+                text: 'Blended $ / M tokens (log scale)',
+                color: '#6b6b67',
+                font: { family: "'Manrope', sans-serif", size: 11, weight: '400' }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                pointStyle: 'line',
+                color: '#52514e',
+                font: { family: "'Manrope', sans-serif", size: 11 },
+                padding: 14,
+                boxWidth: 24
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              titleFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+              bodyFont: { family: "'IBM Plex Mono', monospace", size: 12, weight: '500' },
+              padding: 10,
+              boxPadding: 4,
+              usePointStyle: true,
+              callbacks: {
+                title: items => items.length ? formatPricingTick(items[0].parsed.x) : '',
+                label: item => '  ' + item.dataset.label.split(' (')[0] + ':  $' + item.parsed.y.toFixed(2) + '/M'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function formatPriceCell(v) {
+      let s = v.toFixed(4);
+      s = s.replace(/0+$/, '').replace(/\.$/, '');
+      return '$' + s;
+    }
+
+    function togglePricingTable(btn) {
+      const wrap = document.getElementById('pricingChartTableWrap');
+      if (wrap.hasAttribute('hidden')) {
+        wrap.removeAttribute('hidden');
+        btn.textContent = 'View as chart';
+        populatePricingTable();
+      } else {
+        wrap.setAttribute('hidden', '');
+        btn.textContent = 'View as table';
+      }
+    }
+
+    function populatePricingTable() {
+      const tbody = document.getElementById('pricingChartTableBody');
+      if (tbody.childElementCount) return;
+      const rows = [];
+      Object.keys(pricingHistory).forEach(name => {
+        const m = pricingHistory[name];
+        m.events.forEach(e => rows.push({ name: name + ' (' + m.provider + ')', date: e.date, input: e.input, output: e.output, note: e.note }));
+      });
+      rows.sort((a, b) => a.date < b.date ? 1 : -1);
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        [r.name, r.date, formatPriceCell(r.input), formatPriceCell(r.output), r.note].forEach(text => {
+          const td = document.createElement('td');
+          td.textContent = text;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
     }
 
     function selectCompany(item, name, ticker) {
