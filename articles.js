@@ -29,7 +29,7 @@ const articles = [
 
   {
     title: "A quantity, not (yet?) quality view of agentic software development",
-    date: "16 September 2026",
+    date: "11 July 2026",
     text: `I've seen a few people reposting this fascinating graph posted by the FT, which looks at relative change in iOS Marketplace application releases, reviews and usage, before vs after proliferation of agentic software engineering tools.
 
 The analysis is from a paper published in the National Bureau of Economic Research from Demirer et. al, testing whether access to asynchronous agentic coding tools have actually increased productivity - defining this as the building of tools that actually pick up downloads, usage and positive reviews.
@@ -47,7 +47,7 @@ Overall, the volatility of the app reviews line since '24 is intriguing and sugg
 
   {
     title: "AI Token-omics: how much, and how many?",
-    date: "18 May 2026",
+    date: "20 June 2026",
     text: `Breaking it down, we can think of a firm's AI compute spend as a product of two things: price and volume. The fundamental units to think about here are “tokens”, the base blocks of LLM processing, which are roughly 3 or 4 characters in size.
 
 Price, most commonly measured by “cost-per-token” (or per-million-tokens, $/M) has fluctuated across providers and model releases. The leading firms  deal with the tricky task of allocating finite compute amidst exploding demand (complaints about Anthropic's £20/month Pro tier hitting usage limits after only a handful of searches are one example). 
@@ -67,7 +67,7 @@ Overall, while pricing and volumes may settle eventually, the balance of these t
 
   {
     title: "Software pricing: from seat-based to outcome-based?",
-    date: "1 April 2026",
+    date: "29 April 2026",
     text: `Almost all of the largest-scale cloud subscription players have made agentic AI a core part of their roadmap in 2026:
 
 - Salesforce’s AgentForce 360
@@ -89,6 +89,70 @@ These firms must recognise that while the agentic programmes they are rolling ou
 The future will be an increasing focus on charging per service outcome, not per user. In one example, HubSpot have responded by rolling out “HubSpot Credits” which are based on tasks-actually-completed (e.g. fully resolved support tickets) by agents, rather than the number of individual licenses a human support team is using.
 
 With software increasingly commoditised, value propositions will become focused on the end product, not building expertise, or tools themselves. As outlined recently by Sequoia Capital: “In 2025, the fastest-growing AI companies were copilots. In 2026, many will try to become autopilots.”`
+  },
+
+  {
+    title: "LLM adoption & SWE hiring in 2026: the story so far",
+    date: "13 April 2026",
+    text: `Two interesting graphs from a research note by Citadel Securities this week. Much of the narrative around negative price action in software equities has centred on an imminent widespread adoption of AI tools & 10x-100x productivity spikes.
+
+Despite this, in one of the frontier categories of usage, software engineering, the data points to increased hiring over the last few months. Of course this may be lagging due to hiring cycles, or driven by startups / disruptors rather than large incumbent hiring.
+
+[image: article-images/llm-adoption-swe-hiring-1.jpg]
+
+Meanwhile adoption of GenAI tools in the wider population is growing, but so far in a highly linear fashion, and the frequency breakdown suggests these tools are used, but not yet part of everyday workflows.
+
+[image: article-images/llm-adoption-swe-hiring-2.jpg]
+
+Application-layer releases from LLM leaders (e.g. Anthropic's Co-Work, OAI's Codex) could be a further catalyst in 2026, but for now the data suggests we are at the flat section of the S-curve usually associated with new technology adoption.`
+  },
+
+  {
+    title: "Marketplace vs Agentic Commerce - Supply",
+    date: "15 March 2026",
+    text: `One driver of recent bearish sentiment towards software equities has been the expansion of LLMs into online buying journeys (e.g. ChatGPT's Shopping Research / Instant Checkout). Users are increasingly able to research and purchase an item without ever leaving the chatbox via an agent.
+
+Historically, providers of marketplace software have accepted a high CAC (customer acquisition cost) in return for highly repeatable transaction revenue made after the customer is embedded into their platform.
+
+If LLMs become the default place for a customer to begin a search, this paradigm shifts towards the marketplace paying instead to acquire individual transactions with no repeatability. For many providers, there will not be enough room in margins to bear this acquisition cost increase, especially given a high existing CAC.
+
+One defensive moat for marketplace platforms will be the “difficulty of aggregating supply” i.e. how hard is it for the LLM to recreate / resurface the buying options which the downstream marketplaces currently offer in it's response.
+
+Marketplaces least likely to be impacted by agentic commerce are those where the underlying industry/service has the following traits:
+
+- Fragmented - a large number of small suppliers
+- Heterogenous - each offering is unique from the next
+- Illegible - the availability, quality & pricing of each offering is hard to gather and understand quickly
+
+For example, it is relatively easy to aggregate supply as an online hotel booking marketplace (e.g. Trivago $TRVG).
+
+Hotel chains are less numerous (non-fragmented) and their offering i.e. a hotel room with a bed and bathroom is standardised (homogenous). Finally, they have employees who specifically focus on making availability, quality & price info highly visible, including via emerging platforms i.e. LLMs (highly legible).
+
+In contrast, it would be much harder to aggregate supply (i.e. train a model on public data to reproduce the same set of options for the user) for a managed accommodation platform (e.g. AirBNB $ABNB) - for which the opposite of each of these traits applies.
+
+[image: article-images/marketplace-vs-agentic-commerce-1.jpg]`
+  },
+
+  {
+    title: "“Inference Efficiency”: a key value driver for large-cap SaaS in 2026",
+    date: "22 February 2026",
+    text: `A challenge to enterprise-scale software providers in their adoption of AI tools is the “compute tax”. LLMs are increasingly used, with the majority of transactions / API calls at a significant premium to the pre-2022 era.
+
+Large players processing huge volumes suffer a dis-economy of scale, as third party model spend makes up a growing portion of variable costs.
+
+Since 2024, many have passed this cost onto clients, with CRM procurement platform Tropic estimating a 20-37% uplift in pricing across all categories.
+
+One mitigation available to the largest firms is the capital & runway to build their own basic models and deploy “hybrid” strategies.
+
+In a hybrid strategy, platforms divert a portion of traffic to proprietary, small language models (SLMs) for basic tasks, and the remainder to external “frontier” models which handle more sophisticated requests.
+
+[image: article-images/inference-efficiency-1.jpg]
+
+In one example, ServiceNow highlighted that transactions involving AI increased 55x since the launch of their proprietary SLM. They were able to handle this traffic by leveraging their “AI control tower” to distribute user requests intelligently according to complexity. Management now guide gross margin to 83.5% for year end (+250 bps vs FY2024).
+
+This profitability driver of “inference efficiency” - how well firms balance third party costs against performance - is likely to only grow in importance for software equities as agentic tools spike volumes further.
+
+[Sources: Bessemer Venture Partners: The State of AI 2025, ServiceNow: Q3FY2025 earnings report, Tropic.io blog]`
   }
 
 ];
