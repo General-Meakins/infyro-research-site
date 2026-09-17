@@ -809,6 +809,58 @@
       font-weight: 400;
     }
 
+    .stat-tile-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .stat-tile-label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+
+    .stat-tile-value {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .stat-tile-unit {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      margin-left: 2px;
+    }
+
+    .stat-tile-sub {
+      display: block;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    @media (max-width: 640px) {
+      .stat-tile-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
     .cs-note {
       font-size: 11px;
       color: var(--text-tertiary);
@@ -868,25 +920,7 @@
         </svg>
         <p class="page-subtitle">Thematic equity research focused on AI disruption</p>
       </div>
-      <div class="header-meta">
-        <span class="update-label">Last updated</span>
-        <span class="update-time">— placeholder —</span>
-      </div>
     </header>
-
-    <!-- ── Theme bar ── -->
-    <div class="theme-bar">
-      <button class="theme-tab active" onclick="showTheme('agentic-europe', this)">
-        <span class="theme-tab-dot"></span>
-        2026: Agentic Orchestration — Europe
-      </button>
-      <!-- Future themes added here, e.g:
-      <button class="theme-tab" onclick="showTheme('ai-us', this)">
-        <span class="theme-tab-dot"></span>
-        AI Infrastructure: US
-      </button>
-      -->
-    </div>
 
     <!-- ══════════════════════════════════════════ -->
     <!-- THEME: AGENTIC ORCHESTRATION — EUROPE      -->
@@ -947,6 +981,27 @@
         <p>A quality-adjusted view (cost relative to benchmark or task performance, not just raw token price) is planned as a follow-on to this — see note below the table.</p>
       </div>
 
+      <div class="stat-tile-row">
+        <div class="stat-tile">
+          <span class="stat-tile-label">Avg. input cost</span>
+          <span class="stat-tile-value">$1.66<span class="stat-tile-unit">/M</span></span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-tile-label">Avg. output cost</span>
+          <span class="stat-tile-value">$8.18<span class="stat-tile-unit">/M</span></span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-tile-label">Cheapest model</span>
+          <span class="stat-tile-value">$0.035<span class="stat-tile-unit">/$0.14</span></span>
+          <span class="stat-tile-sub">Amazon Nova Micro</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-tile-label">Priciest model</span>
+          <span class="stat-tile-value">$10.00<span class="stat-tile-unit">/$50.00</span></span>
+          <span class="stat-tile-sub">Claude Fable 5.1</span>
+        </div>
+      </div>
+
       <div class="cs-table-wrap">
         <table class="cs-table">
           <thead>
@@ -1001,10 +1056,52 @@
             <tr>
               <td>Grok 4.3</td><td>Balanced</td><td>$1.25</td><td>$2.50</td>
             </tr>
+
+            <tr class="cs-subtotal"><td colspan="4">Meta</td></tr>
+            <tr>
+              <td>Llama 4 Maverick</td><td>Flagship</td><td>$0.19</td><td>$0.65</td>
+            </tr>
+            <tr>
+              <td>Llama 4 Scout</td><td>Balanced</td><td>$0.10</td><td>$0.30</td>
+            </tr>
+            <tr>
+              <td>Llama 3.3 70B</td><td>Fast / affordable</td><td>$0.10</td><td>$0.32</td>
+            </tr>
+
+            <tr class="cs-subtotal"><td colspan="4">Mistral</td></tr>
+            <tr>
+              <td>Mistral Large 3</td><td>Flagship</td><td>$0.50</td><td>$1.50</td>
+            </tr>
+            <tr>
+              <td>Mistral Medium 3.5</td><td>Balanced</td><td>$1.50</td><td>$7.50</td>
+            </tr>
+            <tr>
+              <td>Mistral Small 4</td><td>Fast / affordable</td><td>$0.15</td><td>$0.60</td>
+            </tr>
+
+            <tr class="cs-subtotal"><td colspan="4">DeepSeek</td></tr>
+            <tr>
+              <td>DeepSeek V4 Pro</td><td>Flagship</td><td>$0.66</td><td>$1.98</td>
+            </tr>
+            <tr>
+              <td>DeepSeek Flash</td><td>Fast / affordable</td><td>$0.15</td><td>$0.60</td>
+            </tr>
+
+            <tr class="cs-subtotal"><td colspan="4">Amazon</td></tr>
+            <tr>
+              <td>Nova Premier</td><td>Flagship</td><td>$2.50</td><td>$12.50</td>
+            </tr>
+            <tr>
+              <td>Nova Pro</td><td>Balanced</td><td>$0.80</td><td>$3.20</td>
+            </tr>
+            <tr>
+              <td>Nova Micro</td><td>Fast / affordable</td><td>$0.035</td><td>$0.14</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <p class="cs-note" style="margin-top: 12px;">List API pricing as published by each provider (OpenAI, Anthropic, Google, xAI), correct as of September 2026. Excludes prompt-caching, batch, and long-context surcharge discounts, which vary by provider — see each provider's own pricing page for the fine print. Quality-adjusted value (price relative to benchmark/task performance) is a planned follow-on, not yet built.</p>
+      <p class="cs-note" style="margin-top: 12px;">List API pricing as published by each provider (OpenAI, Anthropic, Google, xAI, Mistral, DeepSeek), correct as of September 2026. Meta and Amazon figures reflect third-party hosted pricing (via OpenRouter) rather than a simple official flat rate, since neither sells direct API access the same way. DeepSeek publishes separate peak-hour pricing (roughly 2x the off-peak rates shown). Excludes prompt-caching, batch, and long-context surcharge discounts, which vary by provider — see each provider's own pricing page for the fine print. Quality-adjusted value (price relative to benchmark/task performance) is a planned follow-on, not yet built.</p>
+      <p class="cs-note">Averages and cheapest/priciest above are computed across all 23 models in the table. The two context-tiered models (Gemini 3.1 Pro Preview, Grok 4.6) use their base (≤200k context) rate for this calculation.</p>
     </div>
 
     <!-- ══════════════════════════════════════ -->
