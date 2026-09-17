@@ -61,6 +61,12 @@
     }
 
     .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-text-block {
       max-width: 380px;
       text-align: left;
     }
@@ -81,19 +87,11 @@
       margin-top: 10px;
     }
 
-    .header-contact-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-top: 14px;
-      margin-bottom: 0;
-    }
-
     .header-contact-icons {
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-top: 8px;
+      flex-shrink: 0;
     }
 
     .contact-icon-wrap {
@@ -1021,9 +1019,10 @@
         </svg>
       </div>
       <div class="header-right">
-        <p class="header-tagline">Thematic equity research focused on AI disruption</p>
-        <p class="header-about-text">Infyro Research was founded in early 2026, with the mission of investigating the true impact of emerging artificial intelligence tools on software &amp; Internet business models.</p>
-        <p class="header-contact-label">Contact:</p>
+        <div class="header-text-block">
+          <p class="header-tagline">Thematic equity research focused on AI disruption</p>
+          <p class="header-about-text">Infyro Research was founded in early 2026, with the mission of investigating the true impact of emerging artificial intelligence tools on software &amp; Internet business models.</p>
+        </div>
         <div class="header-contact-icons">
           <div class="contact-icon-wrap">
             <a href="mailto:infyroresearch@gmail.com" class="contact-icon" aria-label="Email Infyro Research">
