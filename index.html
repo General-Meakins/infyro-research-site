@@ -60,6 +60,27 @@
       margin-top: 6px;
     }
 
+    .header-right {
+      max-width: 380px;
+      text-align: left;
+    }
+
+    .header-tagline {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+      margin: 0;
+    }
+
+    .header-about-text {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
     .update-label {
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -604,7 +625,7 @@
       padding-top: 24px;
       border-top: 1px solid var(--border-light);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
 
@@ -897,7 +918,7 @@
     <!-- ── Header ── -->
     <header>
       <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" width="308" height="55" aria-label="Infyro Research">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" width="400" height="71" aria-label="Infyro Research">
           <circle cx="32" cy="25" r="7" fill="#14b8a6"/>
           <circle cx="32" cy="25" r="4" fill="#f9f9f7"/>
           <circle cx="32" cy="25" r="2" fill="#14b8a6"/>
@@ -918,7 +939,10 @@
           <text x="78" y="28" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="#14b8a6" letter-spacing="2">Infyro</text>
           <text x="80" y="43" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="300" fill="#14b8a6" letter-spacing="5">Research</text>
         </svg>
-        <p class="page-subtitle">Thematic equity research focused on AI disruption</p>
+      </div>
+      <div class="header-right">
+        <p class="header-tagline">Thematic equity research focused on AI disruption</p>
+        <p class="header-about-text">Infyro Research was founded in early 2026, with the mission of investigating the true impact of emerging artificial intelligence tools on software &amp; Internet business models.</p>
       </div>
     </header>
 
@@ -933,7 +957,6 @@
         <button class="nav-tab active" onclick="showPage('articles', this)">Articles</button>
         <button class="nav-tab" onclick="showPage('tokenomics', this)">Tokenomics</button>
         <button class="nav-tab" onclick="showPage('deepdives', this)">Equity Deep Dives</button>
-        <button class="nav-tab" onclick="showPage('about', this)">About</button>
       </div>
     </nav>
 
@@ -1104,23 +1127,10 @@
       <p class="cs-note">Averages and cheapest/priciest above are computed across all 23 models in the table. The two context-tiered models (Gemini 3.1 Pro Preview, Grok 4.6) use their base (≤200k context) rate for this calculation.</p>
     </div>
 
-    <!-- ══════════════════════════════════════ -->
-    <!-- PAGE: ABOUT                            -->
-    <!-- ══════════════════════════════════════ -->
-    <div id="page-about" class="page-section">
-      <div class="coming-soon">
-        <h2>About</h2>
-        <p>Infyro Research was founded in early 2026, with the mission of investigating the true impact of emerging artificial intelligence tools on software &amp; Internet business models.</p>
-      </div>
-    </div>
-
 
     </div><!-- /theme-agentic-europe -->
 
     <footer>
-      <p class="footer-note">
-        Market cap data updated twice daily. Revenue growth figures reflect the most recent reported fiscal year and are updated quarterly. All figures in local currency unless stated otherwise.
-      </p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" width="112" height="20" aria-label="Infyro Research" opacity="0.4">
         <circle cx="32" cy="25" r="7" fill="#14b8a6"/>
         <circle cx="32" cy="25" r="4" fill="#f9f9f7"/>
