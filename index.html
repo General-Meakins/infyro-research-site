@@ -1176,11 +1176,11 @@
       <div class="stat-tile-row">
         <div class="stat-tile">
           <span class="stat-tile-label">Avg. input cost</span>
-          <span class="stat-tile-value">$1.61<span class="stat-tile-unit">/M</span></span>
+          <span class="stat-tile-value">$1.88<span class="stat-tile-unit">/M</span></span>
         </div>
         <div class="stat-tile">
           <span class="stat-tile-label">Avg. output cost</span>
-          <span class="stat-tile-value">$7.75<span class="stat-tile-unit">/M</span></span>
+          <span class="stat-tile-value">$9.05<span class="stat-tile-unit">/M</span></span>
         </div>
         <div class="stat-tile">
           <span class="stat-tile-label">Cheapest model</span>
@@ -1190,22 +1190,22 @@
         <div class="stat-tile">
           <span class="stat-tile-label">Priciest model</span>
           <span class="stat-tile-value">$10.00<span class="stat-tile-unit">/$50.00</span></span>
-          <span class="stat-tile-sub">Claude Fable 5.1</span>
+          <span class="stat-tile-sub">Claude Fable 5.1 &amp; GPT-6 Astra (tied)</span>
         </div>
       </div>
 
       <div class="pricing-chart-card">
         <div class="pricing-chart-head">
-          <span class="pricing-chart-title">Flagship model pricing &mdash; trailing 12 months (blended $/M tokens, log scale)</span>
+          <span class="pricing-chart-title">Flagship model pricing lineage &mdash; trailing 3 years (blended $/M tokens, log scale)</span>
           <button type="button" class="pricing-chart-toggle" onclick="togglePricingTable(this)">View as table</button>
         </div>
         <div class="pricing-chart-canvas-wrap">
-          <canvas id="pricingChartCanvas" role="img" aria-label="Line chart of blended per-million-token price for each provider's flagship model over the trailing 12 months, plus a blended average across all eight."></canvas>
+          <canvas id="pricingChartCanvas" role="img" aria-label="Line chart of blended per-million-token price for each provider's flagship model lineage over the trailing 3 years, plus a blended average across all providers."></canvas>
         </div>
         <div class="pricing-chart-table-wrap" id="pricingChartTableWrap" hidden>
           <table class="cs-table" id="pricingChartTable">
             <thead>
-              <tr><th>Model</th><th>Date</th><th>Input $/M</th><th>Output $/M</th><th>Note</th></tr>
+              <tr><th>Provider</th><th>Model</th><th>Date</th><th>Input $/M</th><th>Output $/M</th><th>Note</th></tr>
             </thead>
             <tbody id="pricingChartTableBody"></tbody>
           </table>
@@ -1225,7 +1225,7 @@
           <tbody>
             <tr class="cs-subtotal"><td colspan="4">OpenAI</td></tr>
             <tr>
-              <td>GPT-5.6 Sol</td><td>Flagship</td><td>$4.00</td><td>$20.00</td>
+              <td>GPT-6 Astra</td><td>Flagship</td><td>$10.00</td><td>$50.00</td>
             </tr>
             <tr>
               <td>GPT-5.6 Terra</td><td>Balanced</td><td>$2.00</td><td>$12.00</td>
@@ -1363,28 +1363,28 @@
         const et = new Date(e.date + 'T00:00:00Z').getTime();
         if (et <= t && (!latest || et > latest._t)) latest = Object.assign({}, e, { _t: et });
       }
-      return latest ? { input: latest.input, output: latest.output } : null;
+      return latest ? { input: latest.input, output: latest.output, model: latest.model } : null;
     }
 
     function buildSeriesPoints(events, startT, endT) {
       const points = [];
       const startPrice = priceAt(events, startT);
-      if (startPrice) points.push({ x: startT, y: (startPrice.input + startPrice.output) / 2 });
+      if (startPrice) points.push({ x: startT, y: (startPrice.input + startPrice.output) / 2, model: startPrice.model });
       events.forEach(e => {
         const t = new Date(e.date + 'T00:00:00Z').getTime();
-        if (t > startT && t <= endT) points.push({ x: t, y: (e.input + e.output) / 2 });
+        if (t > startT && t <= endT) points.push({ x: t, y: (e.input + e.output) / 2, model: e.model });
       });
       const endPrice = priceAt(events, endT);
       if (endPrice && (points.length === 0 || points[points.length - 1].x !== endT)) {
-        points.push({ x: endT, y: (endPrice.input + endPrice.output) / 2 });
+        points.push({ x: endT, y: (endPrice.input + endPrice.output) / 2, model: endPrice.model });
       }
       return points;
     }
 
-    function computeBlendedTrend(models, startT, endT) {
+    function computeBlendedTrend(providers, startT, endT) {
       const dateSet = new Set([startT, endT]);
-      Object.values(models).forEach(m => {
-        m.events.forEach(e => {
+      Object.values(providers).forEach(p => {
+        p.events.forEach(e => {
           const t = new Date(e.date + 'T00:00:00Z').getTime();
           if (t >= startT && t <= endT) dateSet.add(t);
         });
@@ -1392,9 +1392,9 @@
       const dates = Array.from(dateSet).sort((a, b) => a - b);
       return dates.map(t => {
         let sum = 0, n = 0;
-        Object.values(models).forEach(m => {
-          const p = priceAt(m.events, t);
-          if (p) { sum += (p.input + p.output) / 2; n++; }
+        Object.values(providers).forEach(p => {
+          const pr = priceAt(p.events, t);
+          if (pr) { sum += (pr.input + pr.output) / 2; n++; }
         });
         return { x: t, y: n ? sum / n : null };
       }).filter(p => p.y !== null);
@@ -1412,21 +1412,21 @@
       const windowEnd = new Date();
       windowEnd.setUTCHours(0, 0, 0, 0);
       const windowStart = new Date(windowEnd);
-      windowStart.setUTCFullYear(windowStart.getUTCFullYear() - 1);
+      windowStart.setUTCFullYear(windowStart.getUTCFullYear() - 3);
       const startT = windowStart.getTime();
       const endT = windowEnd.getTime();
 
       const datasets = Object.keys(pricingHistory).map(name => {
-        const m = pricingHistory[name];
+        const p = pricingHistory[name];
         return {
-          label: name + ' (' + m.provider + ')',
-          data: buildSeriesPoints(m.events, startT, endT),
-          borderColor: m.color,
-          backgroundColor: m.color,
+          label: name,
+          data: buildSeriesPoints(p.events, startT, endT),
+          borderColor: p.color,
+          backgroundColor: p.color,
           borderWidth: 2,
           pointRadius: 4,
           pointHoverRadius: 6,
-          pointBackgroundColor: m.color,
+          pointBackgroundColor: p.color,
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
           stepped: 'before',
@@ -1436,7 +1436,7 @@
       });
 
       datasets.push({
-        label: 'Blended average (8 flagship models)',
+        label: 'Blended average (up to 8 providers)',
         data: computeBlendedTrend(pricingHistory, startT, endT),
         borderColor: '#111110',
         backgroundColor: '#111110',
@@ -1472,7 +1472,7 @@
                 callback: formatPricingTick,
                 maxRotation: 0,
                 autoSkip: true,
-                maxTicksLimit: 7
+                maxTicksLimit: 9
               }
             },
             y: {
@@ -1482,7 +1482,7 @@
                 color: '#898781',
                 font: { family: "'IBM Plex Mono', monospace", size: 10 },
                 callback: v => {
-                  const allowed = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50];
+                  const allowed = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200];
                   return allowed.includes(v) ? '$' + v : null;
                 }
               },
@@ -1515,7 +1515,10 @@
               usePointStyle: true,
               callbacks: {
                 title: items => items.length ? formatPricingTick(items[0].parsed.x) : '',
-                label: item => '  ' + item.dataset.label.split(' (')[0] + ':  $' + item.parsed.y.toFixed(2) + '/M'
+                label: item => {
+                  const model = item.raw && item.raw.model ? ' (' + item.raw.model + ')' : '';
+                  return '  ' + item.dataset.label + model + ':  $' + item.parsed.y.toFixed(2) + '/M';
+                }
               }
             }
           }
@@ -1546,13 +1549,13 @@
       if (tbody.childElementCount) return;
       const rows = [];
       Object.keys(pricingHistory).forEach(name => {
-        const m = pricingHistory[name];
-        m.events.forEach(e => rows.push({ name: name + ' (' + m.provider + ')', date: e.date, input: e.input, output: e.output, note: e.note }));
+        const p = pricingHistory[name];
+        p.events.forEach(e => rows.push({ provider: name, model: e.model, date: e.date, input: e.input, output: e.output, note: e.note }));
       });
       rows.sort((a, b) => a.date < b.date ? 1 : -1);
       rows.forEach(r => {
         const tr = document.createElement('tr');
-        [r.name, r.date, formatPriceCell(r.input), formatPriceCell(r.output), r.note].forEach(text => {
+        [r.provider, r.model, r.date, formatPriceCell(r.input), formatPriceCell(r.output), r.note].forEach(text => {
           const td = document.createElement('td');
           td.textContent = text;
           tr.appendChild(td);
