@@ -1044,6 +1044,222 @@
       font-family: 'IBM Plex Mono', monospace;
     }
 
+
+    /* ── Coverage section ── */
+    .cvg-methodology {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+
+    .cvg-methodology summary {
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .cvg-methodology-body { margin-top: 14px; }
+
+    .cvg-methodology-body p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .cvg-segment { margin-bottom: 32px; }
+
+    .cvg-segment-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .cvg-segment-blurb {
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .cvg-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cvg-entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cvg-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Manrope', sans-serif;
+      transition: background 0.12s ease;
+    }
+
+    .cvg-item:hover { background: var(--accent-light); }
+    .cvg-item-open { background: var(--accent-light); }
+
+    .cvg-item-logo {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .cvg-item-name {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .cvg-status-badge {
+      flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      background: var(--tag-bg);
+      border-radius: 4px;
+      padding: 3px 7px;
+    }
+
+    .cvg-item-score {
+      flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    .cvg-risk { color: var(--negative); }
+    .cvg-beneficiary { color: var(--positive); }
+
+    .cvg-item-chevron {
+      flex-shrink: 0;
+      color: var(--text-tertiary);
+      font-size: 11px;
+      transition: transform 0.15s ease;
+    }
+
+    .cvg-item-open .cvg-item-chevron { transform: rotate(180deg); }
+
+    .cvg-profile {
+      border-top: 1px solid var(--border-light);
+      padding: 20px 16px 24px;
+    }
+
+    .cvg-status-note {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border-left: 2px solid var(--accent);
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .cvg-profile-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+
+    .cvg-profile-section { margin-bottom: 22px; }
+    .cvg-profile-section:last-child { margin-bottom: 0; }
+
+    .cvg-profile-text {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .cvg-placeholder-note {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+
+    .cvg-stat-row {
+      grid-template-columns: repeat(2, 1fr);
+      margin-bottom: 10px;
+    }
+
+    .cvg-stat-value { font-size: 16px; }
+
+    .cvg-revenue-line {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .cvg-chart-wrap {
+      position: relative;
+      height: 200px;
+    }
+
+    .cvg-next-earnings {
+      font-size: 13.5px;
+      color: var(--text-primary);
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 10px 14px;
+      display: inline-block;
+    }
+
+    .cvg-scorecard-section {
+      margin-top: 4px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    @media (max-width: 768px) {
+      .cvg-profile-grid { grid-template-columns: 1fr; gap: 8px; }
+      .cvg-item-name { font-size: 13px; }
+      .cvg-item-score { min-width: 40px; }
+    }
+
     /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
@@ -1133,8 +1349,7 @@
       <div class="nav-inner">
         <button class="nav-tab active" onclick="showPage('articles', this)">Articles</button>
         <button class="nav-tab" onclick="showPage('tokenomics', this)">Tokenomics</button>
-        <button class="nav-tab" onclick="showPage('scorecard', this)">AI Disruption Scorecard</button>
-        <button class="nav-tab" onclick="showPage('deepdives', this)">Equity Deep Dives</button>
+        <button class="nav-tab" onclick="showPage('coverage', this)">Coverage</button>
       </div>
     </nav>
 
@@ -1164,13 +1379,35 @@
     <!-- ══════════════════════════════════════ -->
     <!-- PAGE: DEEP DIVES                       -->
     <!-- ══════════════════════════════════════ -->
-    <div id="page-deepdives" class="page-section">
-      <div class="coming-soon">
-        <span class="coming-soon-label">Coming soon</span>
-        <h2>Equity Deep Dives</h2>
-        <p>Long-form research notes on individual names in the coverage universe — examining their positioning within the agentic software value chain, competitive dynamics, and key risk factors.</p>
+    <div id="page-coverage" class="page-section">
+      <h2 class="section-title" style="margin-bottom: 16px;">Coverage</h2>
+      <div class="section-body">
+        <p>Individual profiles for the 14-company coverage basket, grouped by how each fits the AI-disruption thesis. Each entry expands into financials, a description of the business, AI relevance, recent share-price performance, the next scheduled earnings date, and the full <strong>AI Disruption Scorecard</strong> breakdown (methodology below).</p>
+        <p>Earnings-call and annual-report summaries are being added company by company as transcripts are processed — see the placeholder note inside each profile in the meantime.</p>
       </div>
-    </div>
+
+      <details class="cvg-methodology">
+        <summary>Scorecard methodology</summary>
+        <div class="cvg-methodology-body">
+          <p>Each company is scored 0&ndash;4 on five factors. Two measure risk (higher = more exposed); three measure protection or upside (higher = more shielded, or more of a beneficiary). The <strong>Net AI Disruption Score</strong> averages each side to a common scale, then takes the difference: avg(Pricing exposure, Margin exposure) &minus; avg(Moat durability, Demand tailwind, AI response). Positive = net disruption risk. Negative = net AI beneficiary. Range runs roughly &minus;4 to +4.</p>
+          <div class="cs-table-wrap">
+            <table class="cs-table">
+              <thead><tr><th>Factor</th><th>What it measures</th><th>Direction</th></tr></thead>
+              <tbody>
+                <tr><td>Seat/license pricing exposure</td><td>Share of revenue tied to per-seat or per-license pricing that AI agents could compress or let customers automate around</td><td>Risk (0&ndash;4)</td></tr>
+                <tr><td>Margin exposure to AI/inference costs</td><td>Whether embedding AI features pressures gross margin, versus the company being a supplier that benefits from others' AI capex</td><td>Risk (0&ndash;4)</td></tr>
+                <tr><td>Data &amp; workflow moat durability</td><td>How defensible the incumbent's proprietary data, integrations, and switching costs are against an AI-native challenger</td><td>Protective (0&ndash;4)</td></tr>
+                <tr><td>AI-driven demand tailwind</td><td>Direct revenue/volume upside from other companies' AI buildout &mdash; chips, power, cooling, automation, logistics</td><td>Upside (0&ndash;4)</td></tr>
+                <tr><td>Competitive AI response</td><td>How credible and fast the company's own AI product strategy is at defending or growing share</td><td>Protective (0&ndash;4)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cs-note">Scores are a first-pass, directional read based on thesis groupings and company notes, not yet a fully researched pass in the way the Tokenomics figures are sourced and cross-checked. Treat them as a starting hypothesis per company, to be refined with real diligence (earnings-call language, disclosed AI-related revenue, customer commentary) before drawing firm conclusions.</p>
+        </div>
+      </details>
+
+      <div id="coverage-container"></div>
+    </div><!-- /page-coverage -->
 
     <!-- ══════════════════════════════════════ -->
     <!-- PAGE: TOKENOMICS                       -->
@@ -1323,73 +1560,6 @@
       <p class="cs-note">Averages and cheapest/priciest above are computed across all 23 models in the table. The two context-tiered models (Gemini 3.1 Pro Preview, Grok 4.6) use their base (≤200k context) rate for this calculation.</p>
     </div>
 
-    <!-- ══════════════════════════════════════ -->
-    <!-- PAGE: AI DISRUPTION SCORECARD          -->
-    <!-- ══════════════════════════════════════ -->
-    <div id="page-scorecard" class="page-section">
-      <h2 class="section-title" style="margin-bottom: 16px;">AI Disruption Scorecard</h2>
-      <div class="section-body">
-        <p>A consistent scoring lens applied across the 14-company coverage basket, rating each name on five factors that capture both AI disruption risk and AI-driven upside &mdash; rather than a single risk score, since the basket spans software incumbents exposed to automation and infrastructure suppliers who benefit from it.</p>
-        <p>Each factor is scored 0&ndash;4. Two factors measure risk (higher = more exposed); three measure protection or upside (higher = more shielded, or more of a beneficiary). The <strong>Net AI Disruption Score</strong> averages each side to a common scale, then takes the difference: avg(Pricing exposure, Margin exposure) &minus; avg(Moat durability, Demand tailwind, AI response). Positive = net disruption risk. Negative = net AI beneficiary. Range runs roughly &minus;4 to +4.</p>
-      </div>
-
-      <div class="cs-table-wrap">
-        <table class="cs-table">
-          <thead>
-            <tr><th>Factor</th><th>What it measures</th><th>Direction</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Seat/license pricing exposure</td><td>Share of revenue tied to per-seat or per-license pricing that AI agents could compress or let customers automate around</td><td>Risk (0&ndash;4)</td></tr>
-            <tr><td>Margin exposure to AI/inference costs</td><td>Whether embedding AI features pressures gross margin, versus the company being a supplier that benefits from others' AI capex</td><td>Risk (0&ndash;4)</td></tr>
-            <tr><td>Data &amp; workflow moat durability</td><td>How defensible the incumbent's proprietary data, integrations, and switching costs are against an AI-native challenger</td><td>Protective (0&ndash;4)</td></tr>
-            <tr><td>AI-driven demand tailwind</td><td>Direct revenue/volume upside from other companies' AI buildout &mdash; chips, power, cooling, automation, logistics</td><td>Upside (0&ndash;4)</td></tr>
-            <tr><td>Competitive AI response</td><td>How credible and fast the company's own AI product strategy is at defending or growing share</td><td>Protective (0&ndash;4)</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="cs-table-wrap" style="margin-top: 28px;">
-        <table class="cs-table">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Pricing exp.</th>
-              <th>Margin exp.</th>
-              <th>Moat</th>
-              <th>Tailwind</th>
-              <th>AI response</th>
-              <th>Net score</th>
-              <th>Read</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="cs-subtotal"><td colspan="8">Pure software incumbents &mdash; directly exposed to AI automating seat-based revenue</td></tr>
-            <tr><td>SAP SE<span class="cs-ticker">SAP &middot; XETRA</span></td><td>3</td><td>2</td><td>3</td><td>0</td><td>3</td><td><strong style="color: var(--negative);">+0.5</strong></td><td>Strong moat + real AI push (Joule) offset exposure</td></tr>
-            <tr><td>Dassault Systèmes<span class="cs-ticker">DSY &middot; Euronext Paris</span></td><td>3</td><td>2</td><td>4</td><td>0</td><td>2</td><td><strong style="color: var(--negative);">+0.5</strong></td><td>Deep engineering-workflow lock-in (CATIA/SolidWorks) blunts pricing risk</td></tr>
-            <tr><td>Sage Group<span class="cs-ticker">SGE &middot; LSE London</span></td><td>4</td><td>2</td><td>1</td><td>0</td><td>2</td><td><strong style="color: var(--negative);">+2.0</strong></td><td>Highest textbook risk in the basket &mdash; SME bookkeeping is exactly what agents automate</td></tr>
-            <tr><td>Nexus AG<span class="cs-ticker">NXU &middot; XETRA</span></td><td>3</td><td>1</td><td>3</td><td>0</td><td>1</td><td><strong style="color: var(--negative);">+0.7</strong></td><td>Regulated-vertical moat, but less AI muscle than larger peers</td></tr>
-
-            <tr class="cs-subtotal"><td colspan="8">AI infrastructure beneficiaries &mdash; the inverse case</td></tr>
-            <tr><td>ASML<span class="cs-ticker">ASML &middot; Euronext Amsterdam</span></td><td>0</td><td>0</td><td>4</td><td>4</td><td>1</td><td><strong style="color: var(--positive);">&minus;3.0</strong></td><td>Near-monopoly toll-booth on AI chip production, minimal downside</td></tr>
-            <tr><td>Infineon Technologies<span class="cs-ticker">IFX &middot; XETRA</span></td><td>0</td><td>0</td><td>2</td><td>4</td><td>1</td><td><strong style="color: var(--positive);">&minus;2.3</strong></td><td>Silicon-demand beneficiary, minimal disruption exposure</td></tr>
-
-            <tr class="cs-subtotal"><td colspan="8">Industrial/automation names &mdash; AI as a product feature, not an existential threat</td></tr>
-            <tr><td>Siemens AG<span class="cs-ticker">SIE &middot; XETRA</span></td><td>1</td><td>1</td><td>3</td><td>3</td><td>3</td><td><strong style="color: var(--positive);">&minus;2.0</strong></td><td>Dual exposure tilts net positive &mdash; also a data-center capex beneficiary</td></tr>
-            <tr><td>Schneider Electric<span class="cs-ticker">SU &middot; Euronext Paris</span></td><td>1</td><td>1</td><td>3</td><td>4</td><td>2</td><td><strong style="color: var(--positive);">&minus;2.0</strong></td><td>Power/cooling demand is a direct, large AI tailwind</td></tr>
-            <tr><td>Krones AG<span class="cs-ticker">KRN &middot; XETRA</span></td><td>0</td><td>1</td><td>2</td><td>2</td><td>1</td><td><strong style="color: var(--positive);">&minus;1.2</strong></td><td>AI mostly a feature (predictive maintenance), mild beneficiary</td></tr>
-            <tr><td>Konecranes<span class="cs-ticker">KCR &middot; Nasdaq Helsinki</span></td><td>0</td><td>1</td><td>2</td><td>2</td><td>1</td><td><strong style="color: var(--positive);">&minus;1.2</strong></td><td>Similar profile to Krones &mdash; automation as a feature, not a threat</td></tr>
-            <tr><td>Interroll<span class="cs-ticker">INRN &middot; SIX Swiss</span></td><td>0</td><td>0</td><td>2</td><td>3</td><td>1</td><td><strong style="color: var(--positive);">&minus;2.0</strong></td><td>Direct hardware beneficiary of AI-driven fulfillment automation</td></tr>
-
-            <tr class="cs-subtotal"><td colspan="8">Payments, travel, and logistics &mdash; AI reshaping workflows/channels rather than licensing models</td></tr>
-            <tr><td>Adyen NV<span class="cs-ticker">ADYEN &middot; Euronext Amsterdam</span></td><td>2</td><td>1</td><td>3</td><td>1</td><td>2</td><td><strong style="color: var(--positive);">&minus;0.5</strong></td><td>Payments moat + fraud-AI as a product feature, modest exposure</td></tr>
-            <tr><td>Amadeus IT Group<span class="cs-ticker">AMS &middot; BME Madrid</span></td><td>3</td><td>1</td><td>2</td><td>0</td><td>1</td><td><strong style="color: var(--negative);">+1.0</strong></td><td>Disintermediation risk from AI travel agents, moderate moat</td></tr>
-            <tr><td>Logwin AG<span class="cs-ticker">TGHN &middot; XETRA</span></td><td>1</td><td>1</td><td>2</td><td>1</td><td>1</td><td><strong style="color: var(--positive);">&minus;0.3</strong></td><td>AI mainly shows up as routing/efficiency, not a licensing threat</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="cs-note" style="margin-top: 12px;">These scores are a first-pass, directional read based on the company notes and thesis groupings already gathered for this basket &mdash; not yet a fully researched pass in the way the Tokenomics figures are sourced and cross-checked. Treat them as a starting hypothesis per company, to be refined with real diligence (earnings-call language, disclosed AI-related revenue, customer commentary) before drawing firm conclusions.</p>
-    </div><!-- /page-scorecard -->
-
 
     </div><!-- /theme-agentic-europe -->
 
@@ -1411,6 +1581,7 @@
 
   <script src="articles.js"></script>
   <script src="pricing-history.js"></script>
+  <script src="coverage.js"></script>
   <script>
     // ── Page & theme navigation ── //
     function showTheme(id, tab) {
@@ -1428,6 +1599,7 @@
       tab.classList.add('active');
       if (id === 'articles') renderArticles();
       if (id === 'tokenomics') renderPricingChart();
+      if (id === 'coverage') renderCoverage();
     }
 
     // ── Tokenomics pricing chart ── //
@@ -1647,6 +1819,368 @@
       document.getElementById('cs-company-ticker').textContent = ticker + ' — Common-size financial statements';
       document.querySelectorAll('.cs-col-selected, thead .cs-selected').forEach(el => {
         el.textContent = name;
+      });
+    }
+
+
+    // ── Coverage ── //
+    let _coverageChartInstances = {};
+
+    function formatCoverageDate(ts) {
+      return new Date(ts).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    }
+
+    function formatCoveragePrice(v, currency) {
+      if (v === null || v === undefined) return 'n/a';
+      const symbols = { EUR: '€', GBP: '£', CHF: 'CHF ', USD: '$', GBX: '' };
+      const suffix = currency === 'GBX' ? 'p' : '';
+      const prefix = symbols[currency] !== undefined ? symbols[currency] : '';
+      return prefix + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + suffix;
+    }
+
+    function renderCoverage() {
+      const container = document.getElementById('coverage-container');
+      if (!container || typeof coverageCompanies === 'undefined') return;
+      if (container.childElementCount) return;
+
+      coverageSegments.forEach(seg => {
+        const segEl = document.createElement('div');
+        segEl.className = 'cvg-segment';
+
+        const title = document.createElement('h3');
+        title.className = 'cvg-segment-title';
+        title.textContent = seg.title;
+        segEl.appendChild(title);
+
+        const blurb = document.createElement('p');
+        blurb.className = 'cvg-segment-blurb';
+        blurb.textContent = seg.blurb;
+        segEl.appendChild(blurb);
+
+        const list = document.createElement('div');
+        list.className = 'cvg-list';
+        coverageCompanies.filter(c => c.segment === seg.key).forEach(c => {
+          list.appendChild(buildCoverageEntry(c, seg));
+        });
+        segEl.appendChild(list);
+
+        container.appendChild(segEl);
+      });
+    }
+
+    function buildCoverageEntry(c, seg) {
+      const wrap = document.createElement('div');
+      wrap.className = 'cvg-entry';
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cvg-item';
+      btn.setAttribute('aria-expanded', 'false');
+
+      const logo = document.createElement('span');
+      logo.className = 'cvg-item-logo';
+      logo.style.background = seg.color;
+      logo.textContent = c.logoInitials;
+      btn.appendChild(logo);
+
+      const nameWrap = document.createElement('span');
+      nameWrap.className = 'cvg-item-name';
+      const nameText = document.createElement('span');
+      nameText.textContent = c.name;
+      nameWrap.appendChild(nameText);
+      const ticker = document.createElement('span');
+      ticker.className = 'cs-ticker';
+      ticker.textContent = c.ticker + ' · ' + c.exchange;
+      nameWrap.appendChild(ticker);
+      btn.appendChild(nameWrap);
+
+      if (c.status === 'delisted') {
+        const badge = document.createElement('span');
+        badge.className = 'cvg-status-badge';
+        badge.textContent = 'Delisted';
+        btn.appendChild(badge);
+      }
+
+      const score = document.createElement('span');
+      score.className = 'cvg-item-score ' + (c.scorecard.net > 0 ? 'cvg-risk' : 'cvg-beneficiary');
+      score.textContent = (c.scorecard.net > 0 ? '+' : '') + c.scorecard.net.toFixed(1);
+      btn.appendChild(score);
+
+      const chev = document.createElement('span');
+      chev.className = 'cvg-item-chevron';
+      chev.textContent = '▾';
+      btn.appendChild(chev);
+
+      const profile = buildCoverageProfile(c);
+      profile.hidden = true;
+      profile.id = 'cvg-profile-' + c.key;
+
+      btn.addEventListener('click', () => {
+        const willOpen = profile.hidden;
+        profile.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', String(willOpen));
+        btn.classList.toggle('cvg-item-open', willOpen);
+        if (willOpen) renderCoverageChart(c.key);
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(profile);
+      return wrap;
+    }
+
+    function coverageSectionBlock(titleText, bodyText, isPlaceholder) {
+      const sec = document.createElement('div');
+      sec.className = 'cvg-profile-section';
+      const t = document.createElement('div');
+      t.className = 'cs-statement-title';
+      t.textContent = titleText;
+      sec.appendChild(t);
+      const p = document.createElement('p');
+      p.className = isPlaceholder ? 'cvg-placeholder-note' : 'cvg-profile-text';
+      p.textContent = bodyText;
+      sec.appendChild(p);
+      return sec;
+    }
+
+    function coverageFinancialsBlock(c) {
+      const sec = document.createElement('div');
+      sec.className = 'cvg-profile-section';
+      const t = document.createElement('div');
+      t.className = 'cs-statement-title';
+      t.textContent = 'Summary financials';
+      sec.appendChild(t);
+
+      const row = document.createElement('div');
+      row.className = 'stat-tile-row cvg-stat-row';
+
+      const tiles = [
+        ['Share price', c.price != null ? formatCoveragePrice(c.price, c.currency) : 'n/a', c.priceAsOf ? 'as of ' + c.priceAsOf : (c.price == null ? 'delisted' : '')],
+        ['Market cap', c.marketCap, ''],
+        ['P/E (trailing)', c.pe, ''],
+        ['52-week range', c.week52High != null ? (formatCoveragePrice(c.week52Low, c.currency) + '–' + formatCoveragePrice(c.week52High, c.currency)) : 'n/a', '']
+      ];
+
+      tiles.forEach(t => {
+        const tile = document.createElement('div');
+        tile.className = 'stat-tile';
+        const l = document.createElement('span');
+        l.className = 'stat-tile-label';
+        l.textContent = t[0];
+        tile.appendChild(l);
+        const v = document.createElement('span');
+        v.className = 'stat-tile-value cvg-stat-value';
+        v.textContent = t[1];
+        tile.appendChild(v);
+        if (t[2]) {
+          const s = document.createElement('span');
+          s.className = 'stat-tile-sub';
+          s.textContent = t[2];
+          tile.appendChild(s);
+        }
+        row.appendChild(tile);
+      });
+
+      sec.appendChild(row);
+
+      const rev = document.createElement('p');
+      rev.className = 'cvg-revenue-line';
+      rev.textContent = 'Revenue: ' + c.revenueLine;
+      sec.appendChild(rev);
+
+      return sec;
+    }
+
+    function coverageChartBlock(c) {
+      const sec = document.createElement('div');
+      sec.className = 'cvg-profile-section';
+      const t = document.createElement('div');
+      t.className = 'cs-statement-title';
+      t.textContent = 'Share price — trailing ~12 months';
+      sec.appendChild(t);
+
+      if (!c.priceHistory || c.priceHistory.length === 0) {
+        const p = document.createElement('p');
+        p.className = 'cvg-placeholder-note';
+        p.textContent = 'Not applicable — ' + c.name + ' no longer has a normal live trading history (see status note above).';
+        sec.appendChild(p);
+        return sec;
+      }
+
+      if (c.priceHistorySparse) {
+        const note = document.createElement('p');
+        note.className = 'cvg-placeholder-note';
+        note.style.marginBottom = '8px';
+        note.textContent = 'Limited historical price data available for this name — chart shows only confirmed data points found; treat the trend as indicative, not a full monthly series.';
+        sec.appendChild(note);
+      }
+
+      const chartWrap = document.createElement('div');
+      chartWrap.className = 'cvg-chart-wrap';
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cvg-chart-' + c.key;
+      canvas.setAttribute('role', 'img');
+      canvas.setAttribute('aria-label', 'Line chart of ' + c.name + ' share price over the trailing year.');
+      chartWrap.appendChild(canvas);
+      sec.appendChild(chartWrap);
+
+      return sec;
+    }
+
+    function coverageScorecardBlock(c) {
+      const sec = document.createElement('div');
+      sec.className = 'cvg-profile-section cvg-scorecard-section';
+      const t = document.createElement('div');
+      t.className = 'cs-statement-title';
+      t.textContent = 'AI Disruption Scorecard breakdown';
+      sec.appendChild(t);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'cs-table-wrap';
+      const table = document.createElement('table');
+      table.className = 'cs-table';
+      const thead = document.createElement('thead');
+      const headRow = document.createElement('tr');
+      ['Pricing exp.', 'Margin exp.', 'Moat', 'Tailwind', 'AI response', 'Net score'].forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        headRow.appendChild(th);
+      });
+      thead.appendChild(headRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      const row = document.createElement('tr');
+      const s = c.scorecard;
+      [s.pricing, s.margin, s.moat, s.tailwind, s.response].forEach(v => {
+        const td = document.createElement('td');
+        td.textContent = v;
+        row.appendChild(td);
+      });
+      const netTd = document.createElement('td');
+      const strong = document.createElement('strong');
+      strong.style.color = s.net > 0 ? 'var(--negative)' : 'var(--positive)';
+      strong.textContent = (s.net > 0 ? '+' : '') + s.net.toFixed(1);
+      netTd.appendChild(strong);
+      row.appendChild(netTd);
+      tbody.appendChild(row);
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      sec.appendChild(wrap);
+
+      const read = document.createElement('p');
+      read.className = 'cs-note';
+      read.textContent = s.read;
+      sec.appendChild(read);
+
+      return sec;
+    }
+
+    function buildCoverageProfile(c) {
+      const panel = document.createElement('div');
+      panel.className = 'cvg-profile';
+
+      if (c.statusNote) {
+        const note = document.createElement('p');
+        note.className = 'cvg-status-note';
+        note.textContent = c.statusNote;
+        panel.appendChild(note);
+      }
+
+      const grid = document.createElement('div');
+      grid.className = 'cvg-profile-grid';
+
+      const left = document.createElement('div');
+      left.className = 'cvg-profile-col';
+      left.appendChild(coverageSectionBlock('What they do', c.description, false));
+      left.appendChild(coverageSectionBlock('AI relevance', c.aiRelevance, false));
+      left.appendChild(coverageSectionBlock(
+        'Earnings call & annual report summary',
+        c.earningsSummary || ('Pending research — this section will summarize management\'s AI-strategy language once transcripts from the earnings-call pipeline are processed for ' + c.name + '.'),
+        true
+      ));
+
+      const right = document.createElement('div');
+      right.className = 'cvg-profile-col';
+      right.appendChild(coverageFinancialsBlock(c));
+      right.appendChild(coverageChartBlock(c));
+      const earn = document.createElement('div');
+      earn.className = 'cvg-profile-section';
+      const earnTitle = document.createElement('div');
+      earnTitle.className = 'cs-statement-title';
+      earnTitle.textContent = 'Next earnings';
+      earn.appendChild(earnTitle);
+      const earnP = document.createElement('p');
+      earnP.className = 'cvg-next-earnings';
+      earnP.textContent = c.nextEarnings;
+      earn.appendChild(earnP);
+      right.appendChild(earn);
+
+      grid.appendChild(left);
+      grid.appendChild(right);
+      panel.appendChild(grid);
+
+      panel.appendChild(coverageScorecardBlock(c));
+
+      return panel;
+    }
+
+    function renderCoverageChart(key) {
+      if (_coverageChartInstances[key]) { _coverageChartInstances[key].resize(); return; }
+      const c = coverageCompanies.find(x => x.key === key);
+      if (!c || !c.priceHistory || c.priceHistory.length === 0) return;
+      const canvas = document.getElementById('cvg-chart-' + key);
+      if (!canvas || typeof Chart === 'undefined') return;
+
+      const seg = coverageSegments.find(s => s.key === c.segment);
+      const color = seg ? seg.color : '#14b8a6';
+      const points = c.priceHistory.map(p => ({ x: new Date(p.date + 'T00:00:00Z').getTime(), y: p.price }));
+
+      _coverageChartInstances[key] = new Chart(canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: c.name,
+            data: points,
+            borderColor: color,
+            backgroundColor: color,
+            borderWidth: 2,
+            pointRadius: c.priceHistorySparse ? 5 : 3,
+            pointHoverRadius: 6,
+            pointBackgroundColor: color,
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 2,
+            fill: false,
+            tension: 0.15
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            x: {
+              type: 'linear',
+              grid: { color: '#e1e0d9' },
+              ticks: {
+                color: '#898781',
+                font: { family: "'IBM Plex Mono', monospace", size: 10 },
+                callback: formatCoverageDate,
+                maxRotation: 0,
+                autoSkip: true,
+                maxTicksLimit: 6
+              }
+            },
+            y: {
+              grid: { color: '#e1e0d9' },
+              ticks: {
+                color: '#898781',
+                font: { family: "'IBM Plex Mono', monospace", size: 10 },
+                callback: v => formatCoveragePrice(v, c.currency)
+              }
+            }
+          }
+        }
       });
     }
 
