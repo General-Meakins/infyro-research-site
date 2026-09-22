@@ -1,5 +1,6 @@
-// coverage.js — Coverage section data: 14-company basket profiles + AI Disruption Scorecard
-// Generated 21 Sep 2026. See claude/site-build-notes.md in the Infyro Research project for sourcing.
+// coverage.js — Coverage section data: 14-company basket profiles + AI Disruption Scorecard + Value Chain map
+// Generated 22 Sep 2026. See claude/site-build-notes.md in the Infyro Research project for sourcing.
+// marketCapUSD fields are approximate USD-equivalent figures (EUR/GBP/CHF converted at approximate late-Sep-2026 FX) for relative bubble sizing only — not for financial reporting precision.
 const coverageSegments = [
   {
     "key": "pure-software",
@@ -40,6 +41,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "€211.4B",
+    "marketCapUSD": 242.3,
     "revenueLine": "€36.80B (FY2025), +8% YoY reported (+11% cc)",
     "pe": "27.4",
     "priceHistory": [
@@ -120,6 +122,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "17 Sep 2026",
     "marketCap": "€27.25B",
+    "marketCapUSD": 31.23,
     "revenueLine": "€6.24B (FY2025), +4% YoY (cc); FY2026 guidance +3–5%",
     "pe": "21.2",
     "priceHistory": [
@@ -204,6 +207,7 @@ const coverageCompanies = [
     "currency": "GBX",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "£8.8B",
+    "marketCapUSD": 11.77,
     "revenueLine": "£2,513M (FY2025, yr ended 30 Sep 2025), +10% YoY; 9M FY2026 revenue £2,062M, +11%",
     "pe": "24.8",
     "priceHistory": [
@@ -289,6 +293,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": null,
     "marketCap": "— (last traded near €1.2B equity value at the €70.00/share takeover price)",
+    "marketCapUSD": 1.375,
     "revenueLine": "€266M (FY2024, last full public year), +8.3% YoY; 9M 2025 revenue €209.7M, +9.9% YoY",
     "pe": "n/a (no longer a live market multiple)",
     "priceHistory": [],
@@ -320,6 +325,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "≈€555B",
+    "marketCapUSD": 636.0,
     "revenueLine": "€32.7B (FY2025), +16% YoY; Q2 2026 revenue €9.3B",
     "pe": "52",
     "priceHistory": [
@@ -404,6 +410,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "≈€73B",
+    "marketCapUSD": 83.66,
     "revenueLine": "€14.662B (FY2025, yr ended 30 Sep 2025), −2% YoY; Q3 FY2026 revenue €4.172B, record quarter",
     "pe": "61",
     "priceHistory": [
@@ -484,6 +491,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈€202.8B",
+    "marketCapUSD": 232.4,
     "revenueLine": "€78.91B (FY2025, yr ended 30 Sep 2025), +3.9% YoY; Q3 FY2026 revenue €20.8B, +7% nominal/+8% comparable",
     "pe": "26.4",
     "priceHistory": [
@@ -568,6 +576,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈€160.7B",
+    "marketCapUSD": 184.2,
     "revenueLine": "€40.15B (FY2025, record year), +5.2% YoY; H1 2026 revenue €21.2B, +9.8% reported/+14.0% organic",
     "pe": "34.4",
     "priceHistory": [
@@ -652,6 +661,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈€3.60B",
+    "marketCapUSD": 4.126,
     "revenueLine": "€5.66B (FY2025), +7.0% YoY; H1 2026 revenue €2,714.9M, roughly flat reported (+1.8% currency-adjusted)",
     "pe": "12.3",
     "priceHistory": [
@@ -740,6 +750,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈€6.87B",
+    "marketCapUSD": 7.873,
     "revenueLine": "€4.19B (FY2025), −0.9% YoY; H1 2026 net sales €1,927.4M, −5.3% YoY (order intake described as record)",
     "pe": "18.0",
     "priceHistory": [
@@ -781,6 +792,7 @@ const coverageCompanies = [
     "currency": "CHF",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈CHF 1.29B",
+    "marketCapUSD": 1.571,
     "revenueLine": "CHF 514.2M (FY2025), −2.5% reported/+1.4% local currency; H1 2026 sales CHF 269.9M, +9.0% reported/+14.1% local currency",
     "pe": "23.7",
     "priceHistory": [
@@ -869,6 +881,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "≈€28B",
+    "marketCapUSD": 32.09,
     "revenueLine": "€2,364.2M (FY2025), +18% YoY (+21% cc); H1 2026 revenue €1,302.9M, +19% YoY (+21% cc)",
     "pe": "25.8",
     "priceHistory": [
@@ -949,6 +962,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "18 Sep 2026",
     "marketCap": "€23.09B",
+    "marketCapUSD": 26.46,
     "revenueLine": "€6,517.0M (FY2025), +6.1% YoY (+8.5% cc); H1 2026 revenue €3,334.9M, +2.3% YoY (+5.1% cc)",
     "pe": "18.17",
     "priceHistory": [
@@ -1025,6 +1039,7 @@ const coverageCompanies = [
     "currency": "EUR",
     "priceAsOf": "21 Sep 2026",
     "marketCap": "≈€798M",
+    "marketCapUSD": 0.9146,
     "revenueLine": "~€1.4B (FY2025, precise YoY unconfirmed — sources conflict); H1 2026 revenue €737.4M vs €692.3M in H1 2025, +6.5% YoY",
     "pe": "14.0",
     "priceHistory": [
@@ -1076,5 +1091,191 @@ const coverageCompanies = [
       "read": "AI mainly shows up as routing/efficiency, not a licensing threat"
     },
     "earningsSummary": null
+  }
+];
+
+const valueChainColumns = [
+  {
+    "key": "ai-infra",
+    "title": "AI / Power Infrastructure",
+    "segmentKey": "ai-infra",
+    "blurb": "Chips, lithography, and the power/cooling layer underneath the AI buildout."
+  },
+  {
+    "key": "industrial",
+    "title": "Industrial / Automation",
+    "segmentKey": "industrial",
+    "blurb": "Where that infrastructure gets built, wired, and automated."
+  },
+  {
+    "key": "payments",
+    "title": "Payments, Travel & Logistics",
+    "segmentKey": "payments",
+    "blurb": "Workflows and channels AI is starting to reshape."
+  },
+  {
+    "key": "pure-software",
+    "title": "Pure Software",
+    "segmentKey": "pure-software",
+    "blurb": "Seat-based application-layer incumbents, most directly exposed to AI agents."
+  }
+];
+
+const valueChainPeers = [
+  {
+    "key": "tsmc",
+    "name": "Taiwan Semiconductor Manufacturing Co.",
+    "ticker": "TSM",
+    "exchange": "TWSE (also NYSE ADR)",
+    "column": "ai-infra",
+    "marketCapUSD": 2030,
+    "priceDisplay": "NT$2,475.00 / $445.14 ADR",
+    "priceAsOf": "22 Sep 2026",
+    "description": "The world's largest dedicated semiconductor foundry, manufacturing leading-edge chips (3nm/2nm) designed by Apple, Nvidia, AMD and others.",
+    "relevanceNote": "ASML's largest and most advanced customer — buys the EUV lithography systems ASML makes to produce the chips powering the AI buildout."
+  },
+  {
+    "key": "nvidia",
+    "name": "Nvidia Corporation",
+    "ticker": "NVDA",
+    "exchange": "Nasdaq",
+    "column": "ai-infra",
+    "marketCapUSD": 5490,
+    "priceDisplay": "$227.38",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Designs the GPUs and AI accelerator systems (plus the CUDA software stack) that power most large-scale AI training and inference.",
+    "relevanceNote": "The single biggest driver of AI-capex-linked demand flowing to ASML (lithography) and Infineon (data-center power semiconductors)."
+  },
+  {
+    "key": "appliedmaterials",
+    "name": "Applied Materials",
+    "ticker": "AMAT",
+    "exchange": "Nasdaq",
+    "column": "ai-infra",
+    "marketCapUSD": 368.42,
+    "priceDisplay": "$464.24",
+    "priceAsOf": "21 Sep 2026",
+    "description": "The world's largest supplier of semiconductor fabrication equipment — deposition, etch and process-control tools used across chipmaking.",
+    "relevanceNote": "A direct wafer-fab-equipment peer to ASML, selling into the same foundry/memory customers racing to expand AI-chip capacity."
+  },
+  {
+    "key": "abb",
+    "name": "ABB Ltd",
+    "ticker": "ABBN",
+    "exchange": "SIX Swiss (also Nasdaq Stockholm)",
+    "column": "industrial",
+    "marketCapUSD": 176.87,
+    "priceDisplay": "CHF 80.02",
+    "priceAsOf": "18 Sep 2026",
+    "description": "Swiss-Swedish industrial technology group spanning electrification, robotics, and industrial automation for utilities and manufacturers.",
+    "relevanceNote": "A direct competitor to Siemens and Schneider Electric across electrification, automation and robotics, increasingly competing for data-center spend too."
+  },
+  {
+    "key": "rockwell",
+    "name": "Rockwell Automation",
+    "ticker": "ROK",
+    "exchange": "NYSE",
+    "column": "industrial",
+    "marketCapUSD": 47.18,
+    "priceDisplay": "$424.89",
+    "priceAsOf": "21 Sep 2026",
+    "description": "US industrial automation company (Allen-Bradley, FactoryTalk) providing control systems and software for discrete and process manufacturing.",
+    "relevanceNote": "The closest large-cap US peer to Siemens' and Schneider Electric's industrial automation businesses."
+  },
+  {
+    "key": "vertiv",
+    "name": "Vertiv Holdings",
+    "ticker": "VRT",
+    "exchange": "NYSE",
+    "column": "industrial",
+    "marketCapUSD": 96.58,
+    "priceDisplay": "$250.86",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Designs, builds and services critical data-center infrastructure — power (UPS, switchgear) and thermal management/cooling systems.",
+    "relevanceNote": "A direct competitor to Schneider Electric's data-center power and cooling business; both are principal beneficiaries of AI data-center buildout."
+  },
+  {
+    "key": "paypal",
+    "name": "PayPal Holdings",
+    "ticker": "PYPL",
+    "exchange": "Nasdaq",
+    "column": "payments",
+    "marketCapUSD": 45.01,
+    "priceDisplay": "$52.62",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Global digital-payments platform (plus Venmo and Braintree) letting consumers and merchants send, receive and manage money online.",
+    "relevanceNote": "A global online-payments/checkout peer competing directly with Adyen for merchant payment processing."
+  },
+  {
+    "key": "sabre",
+    "name": "Sabre Corporation",
+    "ticker": "SABR",
+    "exchange": "Nasdaq",
+    "column": "payments",
+    "marketCapUSD": 0.94,
+    "priceDisplay": "$2.33",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Operates a global distribution system (GDS) connecting travel agencies, airlines and hotels for booking, pricing and distribution.",
+    "relevanceNote": "A direct global-distribution-system peer to Amadeus, competing head-to-head in travel-technology and GDS booking infrastructure."
+  },
+  {
+    "key": "dhl",
+    "name": "DHL Group",
+    "ticker": "DHL",
+    "exchange": "XETRA",
+    "column": "payments",
+    "marketCapUSD": 76.01,
+    "priceDisplay": "€57.68",
+    "priceAsOf": "22 Sep 2026",
+    "description": "The world's largest logistics company — international express delivery, freight forwarding, contract logistics and e-commerce parcel services.",
+    "relevanceNote": "A much larger global freight-forwarding and logistics peer to Logwin, competing in the same freight-forwarding and contract-logistics markets."
+  },
+  {
+    "key": "microsoft",
+    "name": "Microsoft Corporation",
+    "ticker": "MSFT",
+    "exchange": "Nasdaq",
+    "column": "pure-software",
+    "marketCapUSD": 3720,
+    "priceDisplay": "$501.61",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Develops software, cloud services (Azure), productivity tools (Microsoft 365) and enterprise applications (Dynamics 365) used across nearly every industry.",
+    "relevanceNote": "A mega-cap scale benchmark and indirect enterprise-software/cloud competitor to SAP and other basket software companies."
+  },
+  {
+    "key": "oracle",
+    "name": "Oracle Corporation",
+    "ticker": "ORCL",
+    "exchange": "NYSE",
+    "column": "pure-software",
+    "marketCapUSD": 449.21,
+    "priceDisplay": "$148.56",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Enterprise database software, cloud infrastructure (OCI) and ERP/HCM applications, with a growing focus on cloud and AI infrastructure.",
+    "relevanceNote": "SAP's largest global ERP competitor, directly rivaling SAP in enterprise resource planning software."
+  },
+  {
+    "key": "salesforce",
+    "name": "Salesforce Inc",
+    "ticker": "CRM",
+    "exchange": "NYSE",
+    "column": "pure-software",
+    "marketCapUSD": 197.94,
+    "priceDisplay": "$240.51",
+    "priceAsOf": "18 Sep 2026",
+    "description": "Cloud-based customer relationship management (CRM) software, including AI-powered (Agentforce) sales, service and marketing tools.",
+    "relevanceNote": "A leading global enterprise-SaaS peer, giving scale context alongside SAP, Dassault, Sage and Nexus in the pure-software group."
+  },
+  {
+    "key": "workday",
+    "name": "Workday Inc",
+    "ticker": "WDAY",
+    "exchange": "Nasdaq",
+    "column": "pure-software",
+    "marketCapUSD": 46.25,
+    "priceDisplay": "$191.92",
+    "priceAsOf": "21 Sep 2026",
+    "description": "Cloud-based enterprise software for human capital management (HCM) and financial management, used by large and mid-sized organizations.",
+    "relevanceNote": "An HR/finance SaaS peer to Sage Group, competing in cloud-based finance and HR software among larger enterprises."
   }
 ];
