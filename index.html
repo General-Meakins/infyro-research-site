@@ -248,6 +248,48 @@
       font-weight: 500;
     }
 
+    /* ── Coverage nav-tab hover dropdown ── */
+    .nav-tab-group {
+      position: relative;
+    }
+
+    .nav-coverage-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 190px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      z-index: 20;
+    }
+
+    .nav-tab-group:hover .nav-coverage-dropdown,
+    .nav-tab-group:focus-within .nav-coverage-dropdown {
+      display: block;
+    }
+
+    .nav-coverage-dropdown a {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .nav-coverage-dropdown a:hover,
+    .nav-coverage-dropdown a:focus {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
     /* ── Page sections ── */
     .page-section { display: none; }
     .page-section.active { display: block; }
@@ -1654,7 +1696,13 @@
       <div class="nav-inner">
         <button class="nav-tab active" onclick="showPage('articles', this)">Articles</button>
         <button class="nav-tab" onclick="showPage('tokenomics', this)">Tokenomics</button>
-        <button class="nav-tab" onclick="showPage('coverage', this)">Coverage</button>
+        <div class="nav-tab-group">
+          <button class="nav-tab" id="nav-tab-coverage" onclick="showPage('coverage', this)">Coverage</button>
+          <div class="nav-coverage-dropdown">
+            <a tabindex="0" onclick="gotoCoverageSubpage('valuechain')">Value Chain Map</a>
+            <a tabindex="0" onclick="gotoCoverageSubpage('profiles')">Company Profiles</a>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -2498,6 +2546,12 @@
 
 
     // ── Coverage sub-nav ── //
+    function gotoCoverageSubpage(id) {
+      showPage('coverage', document.getElementById('nav-tab-coverage'));
+      const btn = document.querySelector('.coverage-subnav-btn[data-subpage="' + id + '"]');
+      if (btn) showCoverageSubpage(id, btn);
+    }
+
     function showCoverageSubpage(id, btn) {
       document.querySelectorAll('.coverage-subpage').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.coverage-subnav-btn').forEach(b => b.classList.remove('active'));
